@@ -8,7 +8,9 @@ def estacionamientos_all(request):
     if request.method == 'POST':
             form = EstacionamientoForm(request.POST)
             if form.is_valid():
-                estacionamiento = {
+                if len(estacionamientos) > 5:
+                    return HttpResponse('No se pueden agregar mas estacionamientos')
+                estacionamiento = { 
                         'patrono': form.cleaned_data.get('patrono', ''),
                         'nombre': form.cleaned_data.get('nombre', ''),
                         'direccion': form.cleaned_data.get('direccion', ''),
