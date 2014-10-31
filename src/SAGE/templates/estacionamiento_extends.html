@@ -1,0 +1,20 @@
+Estacionamiento: <p>
+Patrono: <b>{{estacionamiento.patrono}}</b>
+Nombre: <b>{{estacionamiento.nombre}}</b>
+direccion: <b>{{estacionamiento.direccion}}</b>
+<p>
+
+<p>
+<p>
+<p>
+
+{% for obj in extends %}
+	{{obj}}<p>
+{% endfor %}
+
+<form action="." method="post">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Submit" />
+</form>
+

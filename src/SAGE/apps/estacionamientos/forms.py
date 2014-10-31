@@ -9,7 +9,7 @@ class EstacionamientoForm(forms.Form):
                             message='Solo debe contener digitos'
                         )
 
-    # nombre del dueño (no se permiten dígitos)
+    # nombre del dueno (no se permiten digitos)
     patrono = forms.CharField(
                     required=True,
                     validators = [
@@ -32,3 +32,20 @@ class EstacionamientoForm(forms.Form):
     email_2 = forms.EmailField(required=False)
 
     rif = forms.CharField(required=True)
+
+    
+
+class EstacionamientoextendedForm(forms.Form):
+
+    tarifa_validator = RegexValidator(
+                            regex='^[0-9]+$',
+                            message='Solo debe contener digitos'
+                        )
+
+    horarioin = forms.TimeField(required = True)
+    horarioout = forms.TimeField(required = True)
+
+    horario_reserin = forms.TimeField(required = True)
+    horario_reserout = forms.TimeField(required = True)
+
+    tarifa =  forms.CharField(required = True, validators = [tarifa_validator])
