@@ -5,6 +5,7 @@ from apps.estacionamientos.forms import EstacionamientoextendedForm
 
 estacionamientos = []
 extends = []
+extends.append(None)
 
 def estacionamientos_all(request):
     if request.method == 'POST':
@@ -48,7 +49,7 @@ def estacionamiento_extend(request, _id):
                         'horario_reserin': form.cleaned_data.get('horario_reserin', ''),
                         'horario_reserout': form.cleaned_data.get('horario_reserout', ''),
                 }
-                extends.append(extend)
+                extends[0] = extend
                 return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id],'extend': extend})
 
             else:

@@ -8,8 +8,13 @@ direccion: <b>{{estacionamiento.direccion}}</b>
 <p>
 <p>
 
-{% for obj in extends %}
-	{{obj}}<p>
+{% for obj in extend %}
+	{%if obj != None%}
+		Editar:<p>
+		{{obj}}<p>
+	{% else %}
+		Agregar especificaciones:
+	{% endif%}
 {% endfor %}
 
 <form action="." method="post">
