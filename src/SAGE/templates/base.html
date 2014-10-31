@@ -56,7 +56,7 @@
           
           <ul class="nav nav-stacked">
             <li>
-              <a href="http://localhost:8000/estacionamientos/">
+              <a href=".">
                 <i class="fa fa-bus"></i>
                 Estaciomientos
               </a>
@@ -70,7 +70,7 @@
 <div class="col-sm-10">
         
       <!-- column 2 --> 
-       <h3><i class="fa fa-bus"></i> Estacionamientos {{estacionamientos.count}}</h3>  
+       <h3><i class="fa fa-bus"></i> Estacionamientos</h3>  
             
        <hr>
       
@@ -86,16 +86,16 @@
       {% if estacionamientos %}
 
         <thead>
-          <tr><th>Dueño</th><th>Nombre</th><th>RIF</th><th>Ver detalles</th></tr>
+          <tr><th></th><th>Dueño</th><th>Nombre</th><th>RIF</th></tr>
         </thead>
         <tbody>
         {% for obj in estacionamientos %}
-          <tr><td>{{obj.patrono}}</td><td>{{obj.nombre}}</td><td>{{obj.rif}}</td><td><a href="http://localhost:8000/estacionamientos/{{forloop.counter0}}"><i class="fa fa-search"></i></a> </td></tr>
+          <tr><td>{{forloop.counter}}</td><td>{{obj.patrono}}</td><td>{{obj.nombre}}</td><td>{{obj.rif}}</td><td><a href="./{{forloop.counter0}}"><i class="fa fa-search"></i></a> </td></tr>
         {% endfor %}
         </tbody>
         {% else %}
-    <h3>No hay estacionamientos</h3>
-    {% endif %}
+       <h3>No hay estacionamientos</h3>
+      {% endif %}
       </table>
       <hr>              
     </div><div class="col-md-4">
@@ -131,7 +131,7 @@
                   </label>
                   <div class="controls">
                     <button type="submit" class="btn btn-primary">
-                      Post
+                      Crear estacionamiento
                     </button>
                   </div>
                 </div>

@@ -8,23 +8,20 @@ def estacionamientos_all(request):
     if request.method == 'POST':
             form = EstacionamientoForm(request.POST)
             if form.is_valid():
-                if len(estacionamientos) > 5:
+                if len(estacionamientos) >= 5:
                     return HttpResponse('No se pueden agregar mas estacionamientos')
-                estacionamiento = { 
-                        'patrono': form.cleaned_data.get('patrono', ''),
-                        'nombre': form.cleaned_data.get('nombre', ''),
-                        'direccion': form.cleaned_data.get('direccion', ''),
-                        'telefono_1': form.cleaned_data.get('telefono_1', ''),
-                        'telefono_2': form.cleaned_data.get('telefono_2', ''),
-                        'telefono_3': form.cleaned_data.get('telefono_3', ''),
-                        'email_1': form.cleaned_data.get('email_1', ''),
-                        'email_2': form.cleaned_data.get('email_2', ''),
-                        'rif': form.cleaned_data.get('rif', ''),
+                estacionamiento = {
+                        'patrono': form.cleaned_data['patrono'],
+                        'nombre': form.cleaned_data['nombre'],
+                        'direccion': form.cleaned_data['direccion'],
+                        'telefono_1': form.cleaned_data['telefono_1'],
+                        'telefono_2': form.cleaned_data['telefono_2'],
+                        'telefono_3': form.cleaned_data['telefono_3'],
+                        'email_1': form.cleaned_data['email_1'],
+                        'email_2': form.cleaned_data['email_2'],
+                        'rif': form.cleaned_data['rif'],
                 }
                 estacionamientos.append(estacionamiento)
-                return HttpResponse(estacionamiento)
-            else:
-                return HttpResponse('No')
     else:
         form = EstacionamientoForm()
     return render(request, 'base.html', {'form': form, 'estacionamientos': estacionamientos})
