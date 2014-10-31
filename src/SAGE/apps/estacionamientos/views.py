@@ -25,8 +25,7 @@ def estacionamientos_all(request):
                 return HttpResponse('No')
     else:
         form = EstacionamientoForm()
-
-    return render(request, 'estacionamientos.html', {'form': form, 'estacionamientos': estacionamientos})
+    return render(request, 'base.html', {'form': form, 'estacionamientos': estacionamientos})
 
 def estacionamiento_detail(request, _id):
     _id = int(_id)
