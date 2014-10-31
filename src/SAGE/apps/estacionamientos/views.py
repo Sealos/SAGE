@@ -31,6 +31,6 @@ def estacionamientos_all(request):
 def estacionamiento_detail(request, _id):
     _id = int(_id)
     if len(estacionamientos) < _id + 1:
-        return render(request, '404.html')
+        return render(request, 'base.html')
     else:
         return render(request, 'estacionamiento.html', {'estacionamiento': estacionamientos[_id]})
