@@ -14,7 +14,7 @@ def estacionamientos_all(request):
                 if len(estacionamientos) >= 5:
                     return HttpResponse('No se pueden agregar mas estacionamientos')
                 estacionamiento = {
-                        'patrono': form.cleaned_data['patrono'],
+                        'propietario': form.cleaned_data['propietario'],
                         'nombre': form.cleaned_data['nombre'],
                         'direccion': form.cleaned_data['direccion'],
                         'telefono_1': form.cleaned_data['telefono_1'],

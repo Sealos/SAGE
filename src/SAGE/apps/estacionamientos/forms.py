@@ -5,13 +5,14 @@ from django.core.validators import RegexValidator
 class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
-                            regex='^[(0414)(0424)(0416)(0426)(0212)]-?\d{7}$',
+                            regex='^0[(414)(424)(416)(426)(212)]-?\d{7}$',
                             message='Solo debe contener digitos'
                         )
 
     # nombre del dueno (no se permiten digitos)
     propietario = forms.CharField(
                     required=True,
+                    label="Propietario",
                     validators = [
                           RegexValidator(
                                 regex='^[a-zA-z]+$',
@@ -20,7 +21,7 @@ class EstacionamientoForm(forms.Form):
                     ]
                 )
 
-    nombre = forms.CharField(required=True)
+    nombre = forms.CharField(required=True, label="Nombre")
 
     direccion = forms.CharField(required=True)
 
@@ -33,6 +34,7 @@ class EstacionamientoForm(forms.Form):
 
     rif = forms.CharField(
                     required=True,
+                    label="RIF",
                     validators = [
                           RegexValidator(
                                 regex='^[JV]-?\d{8}-?\d$',

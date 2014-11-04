@@ -1,0 +1,25 @@
+Estacionamiento: <p>
+Patrono: <b>{{estacionamiento.patrono}}</b>
+Nombre: <b>{{estacionamiento.nombre}}</b>
+direccion: <b>{{estacionamiento.direccion}}</b>
+<p>
+
+<p>
+<p>
+<p>
+
+{% for obj in extend %}
+	{%if obj != None%}
+		Editar:<p>
+		{{obj}}<p>
+	{% else %}
+		Agregar especificaciones:
+	{% endif%}
+{% endfor %}
+
+<form action="." method="post">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Submit" />
+</form>
+
