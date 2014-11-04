@@ -1,8 +1,11 @@
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponse
 from apps.estacionamientos.forms import EstacionamientoForm
+from apps.estacionamientos.forms import EstacionamientoextendedForm
 
 estacionamientos = []
+extends = []
+extends.append(None)
 
 def estacionamientos_all(request):
     if request.method == 'POST':
@@ -32,3 +35,26 @@ def estacionamiento_detail(request, _id):
         return render(request, 'base.html')
     else:
         return render(request, 'estacionamiento.html', {'estacionamiento': estacionamientos[_id]})
+
+def estacionamiento_extend(request, _id):
+    _id = int(_id)
+
+    if (request.method == 'POST'):
+            form = EstacionamientoextendedForm(request.POST)
+            if form.is_valid():
+                extend = {
+                        'tarifa': form.cleaned_data.get('tarifa', ''),
+                        'horarioin': form.cleaned_data.get('horarioin', ''),
+                        'horarioout': form.cleaned_data.get('horarioout', ''),
+                        'horario_reserin': form.cleaned_data.get('horario_reserin', ''),
+                        'horario_reserout': form.cleaned_data.get('horario_reserout', ''),
+                }
+                extends[0] = extend
+                return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id],'extend': extend})
+
+            else:
+                return HttpResponse('No')
+    else:
+        form = EstacionamientoextendedForm()
+
+    return render(request, 'estacionamiento_extends.html', {'form': form, 'estacionamiento': estacionamientos[_id],'extend': extends})
