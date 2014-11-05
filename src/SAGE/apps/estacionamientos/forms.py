@@ -5,7 +5,7 @@ from django.core.validators import RegexValidator
 class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
-                            regex='^0[(414)(424)(416)(426)(212)]-?\d{7}$',
+                            regex='^0/d{3}-?\d{7}$',
                             message='Solo debe contener digitos'
                         )
 
