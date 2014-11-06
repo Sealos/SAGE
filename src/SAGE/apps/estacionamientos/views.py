@@ -58,3 +58,7 @@ def estacionamiento_extend(request, _id):
         form = EstacionamientoextendedForm()
 
     return render(request, 'estacionamiento_extends.html', {'form': form, 'estacionamiento': estacionamientos[_id],'extend': extends})
+
+
+def prueba(request):
+    return render(request,'pruebadb.html',{'a':'hola'})
