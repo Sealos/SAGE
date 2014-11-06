@@ -44,7 +44,7 @@ class EstacionamientoForm(forms.Form):
                 )
 
 
-class EstacionamientoextendedForm(forms.Form):
+class EstacionamientoExtendedForm(forms.Form):
 
     tarifa_validator = RegexValidator(
                             regex='^[0-9]+$',

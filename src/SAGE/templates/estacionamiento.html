@@ -14,9 +14,6 @@
     
    </head>
 
-
-
-
  <body>
         
         <!-- Header -->
@@ -28,19 +25,6 @@
       </button>
       <a href="#" class="navbar-brand">SAGE</a>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li class="dropdown">
-          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
-          <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
   </div><!-- /container -->
 </div>
 <!-- /Header -->
@@ -50,20 +34,14 @@
   
   <!-- upper section -->
   <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-2">
       <!-- left -->
-      <h3><i class="fa fa-users"></i> Bienvenido!</h3>
+                <h3>
+            <i class="glyphicon glyphicon-briefcase">
+            </i>
+            Menú
+          </h3>
       <hr>
-      
-<!--       <ul class="nav nav-stacked">
-        <li><a href="javascript:;"><i class="glyphicon glyphicon-briefcase"></i> Modificar Perfil</a></li>
-        <li><a href="javascript:;"><i class="fa fa-cc-visa"></i> Metodos de pago</a></li>
-        <li><a href="javascript:;"><i class="glyphicon glyphicon-list-alt"></i> Reservas</a></li>
-        
-        
-        <li><a href="javascript:;"><i class="fa fa-bus"></i> Estacionamientos</a></li>
-        
-      </ul> -->
 
          <ul class="nav nav-stacked">
             <li>
@@ -143,7 +121,56 @@
    
 
     
-    </div></div><!--/col-span-9-->
+    </div><div class="col-md-4">
+
+    
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <i class="glyphicon glyphicon-wrench pull-right">
+                </i>
+                <h4>
+                  Parametrizar
+                </h4>
+              </div>
+            </div>
+            <div class="panel-body">
+
+      
+              
+              <form action="." method="post" class="form form-vertical">
+              {% csrf_token %}
+              {% for field in form %}
+                <div class="control-group">
+                  <div class="controls">
+                    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label}}" for="id_{{field.name}}"><p>
+                    {{ field.errors }}
+                  </div>
+                </div> 
+              {% endfor %}
+                
+                <div class="control-group">
+                  <label>
+                  </label>
+                  <div class="controls">
+                    <button type="submit" class="btn btn-primary">
+                      Crear estacionamiento
+                    </button>
+                  </div>
+                </div>
+                
+                
+              </form>
+              
+              
+            </div>
+            <!--/panel content-->
+          </div>
+          <!--/panel-->
+          
+          <!--/panel-->
+          
+        </div><!--/col-span-9-->
     
   </div><!--/row-->
   <!-- /upper section -->
@@ -168,57 +195,6 @@
 <br>
 <br>
 
-
-  <footer class="text-center">
-      Paradigm Shift
-    </footer>
-
-<div class="modal" id="addWidgetModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Add Widget</h4>
-      </div>
-      <div class="modal-body">
-        <p>Add a widget stuff here..</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dalog -->
-</div><!-- /.modal -->
-
-
-        
-        <script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-
-        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-        
-        <!-- JavaScript jQuery code from Bootply.com editor  -->
-        
-        <script type="text/javascript">
-        
-        $(document).ready(function() {
-        
-            
-        
-        });
-        
-        </script>
-        
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-          ga('create', 'UA-40413119-1', 'bootply.com');
-          ga('send', 'pageview');
-        </script>
-        
-    
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
 </body></html>

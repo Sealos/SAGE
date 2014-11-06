@@ -1,11 +1,11 @@
 from django.db import models
 from apps.estacionamientos.forms import EstacionamientoForm
-from apps.estacionamientos.forms import EstacionamientoextendedForm
+from apps.estacionamientos.forms import EstacionamientoExtendedForm
 from django.forms import ModelForm
 
 class EstacionamientoModel(models.Model):
 	
-	propietario = models.CharField(max_length = 50, help_text = "Nombre Propio" )
+	propietario = models.CharField(max_length = 50, help_text = "Nombre Propio")
 	nombre = models.CharField(max_length = 50)
 	direccion = models.TextField(max_length = 120)
 	
@@ -17,9 +17,7 @@ class EstacionamientoModel(models.Model):
 	email_2 = models.EmailField(blank=True, null=True)
 
 	rif = models.CharField(max_length = 12)
-    
-class EstacionamientoextendModel(models.Model):
-	# ESTE CREO QUE SE TIENE QUE CAMBIAR A IntegerField 
+
 	tarifa = models.CharField(max_length = 50)
 	horarioin = models.TimeField()
 	horariout = models.TimeField()
@@ -29,9 +27,5 @@ class EstacionamientoextendModel(models.Model):
 class EstacionamientoModelForm(EstacionamientoForm):
 	class Meta:
 		model = EstacionamientoModel
-		fields = ['propietario', 'nombre', 'direccion', 'telefono_1', 'telefono_2', 'telefono_3', 'email_1', 'email_2', 'rif']
-		
-class EstacionamientoextendModelForm(EstacionamientoextendedForm):
-	class Meta:
-		model = EstacionamientoextendModel 
-		fields = ['tarifa', 'horarioin', 'horariout', 'horario_resein', 'horario_reserout']
+		fields = ['propietario', 'nombre', 'direccion', 'telefono_1', 'telefono_2', 'telefono_3', 'email_1',
+				'email_2', 'rif', 'tarifa', 'horarioin', 'horariout', 'horario_resein', 'horario_reserout']

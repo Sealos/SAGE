@@ -1,11 +1,9 @@
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponse
 from apps.estacionamientos.forms import EstacionamientoForm
-from apps.estacionamientos.forms import EstacionamientoextendedForm
+from apps.estacionamientos.forms import EstacionamientoExtendedForm
 
 estacionamientos = []
-extends = []
-extends.append(None)
 
 def estacionamientos_all(request):
     if request.method == 'POST':
@@ -31,34 +29,28 @@ def estacionamientos_all(request):
 
 def estacionamiento_detail(request, _id):
     _id = int(_id)
-    if len(estacionamientos) < _id + 1:
-        return render(request, 'base.html')
-    else:
-        return render(request, 'estacionamiento.html', {'estacionamiento': estacionamientos[_id]})
+    if request.method == 'GET':
+        # Mayor al numero que hay
+        if len(estacionamientos) < _id + 1:
+            return render(request, '404.html')
+        else:
+            form = EstacionamientoExtendedForm()
+            return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
 
-def estacionamiento_extend(request, _id):
-    _id = int(_id)
-
-    if (request.method == 'POST'):
-            form = EstacionamientoextendedForm(request.POST)
+    elif request.method == 'POST':
+            form = EstacionamientoExtendedForm(request.POST)
             if form.is_valid():
-                extend = {
-                        'tarifa': form.cleaned_data.get('tarifa', ''),
-                        'horarioin': form.cleaned_data.get('horarioin', ''),
-                        'horarioout': form.cleaned_data.get('horarioout', ''),
-                        'horario_reserin': form.cleaned_data.get('horario_reserin', ''),
-                        'horario_reserout': form.cleaned_data.get('horario_reserout', ''),
-                }
-                extends[0] = extend
-                return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id],'extend': extend})
+                estacionamientos[_id]['tarifa'] = form.cleaned_data.get('tarifa', ''),
+                estacionamientos[_id]['horarioin'] = form.cleaned_data.get('horarioin', ''),
+                estacionamientos[_id]['horarioout'] = form.cleaned_data.get('horarioout', ''),
+                estacionamientos[_id]['horario_reserin'] = form.cleaned_data.get('horario_reserin', ''),
+                estacionamientos[_id]['horario_reserout'] = form.cleaned_data.get('horario_reserout', ''),
+                return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id]})
 
             else:
                 return HttpResponse('No')
     else:
-        form = EstacionamientoextendedForm()
+        form = EstacionamientoExtendedForm()
 
-    return render(request, 'estacionamiento_extends.html', {'form': form, 'estacionamiento': estacionamientos[_id],'extend': extends})
+    return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
 
-
-def prueba(request):
-    return render(request,'pruebadb.html',{'a':'hola'})
