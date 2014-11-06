@@ -46,10 +46,7 @@ def estacionamiento_detail(request, _id):
                 estacionamientos[_id]['horario_reserin'] = form.cleaned_data['horario_reserin']
                 estacionamientos[_id]['horario_reserout'] = form.cleaned_data['horario_reserout']
                 estacionamientos[_id]['puestos'] = form.cleaned_data['puestos']
-                return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id]})
 
-            else:
-                return HttpResponse('No')
     else:
         form = EstacionamientoExtendedForm()
 

@@ -5,8 +5,8 @@ from django.core.validators import RegexValidator
 class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
-                            regex='^(\d)+',
-                            message='Solo debe contener digitos'
+                            regex='^0212-?\d{7}',
+                            message='Debe introducir un formato válido'
                         )
 
     # nombre del dueno (no se permiten digitos)
@@ -37,7 +37,7 @@ class EstacionamientoForm(forms.Form):
                     label="RIF",
                     validators = [
                           RegexValidator(
-                                regex='^[JV]-?\d{8}-?\d$',
+                                regex='^[JVD]-?\d{8}-?\d$',
                                 message='Introduzca un rif con un formato válido'
                         )
                     ]

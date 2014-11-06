@@ -23,7 +23,9 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button>
-      <a href="#" class="navbar-brand">SAGE</a>
+          <div class="navbar-brand" href="#">
+            SAGE
+          </div>
     </div>
   </div><!-- /container -->
 </div>
@@ -62,7 +64,7 @@
        <hr>
       
      <!--/row-->
-    <div class="col-md-8">
+    <div class="col-md-5">
       
       <table class="table table-striped">
         <thead>
@@ -110,17 +112,43 @@
         </tbody>
       </table>
       
-                    
-      
-      <!--tabs-->
-      
-      <!--/tabs-->
-      
+      <hr>  
       <hr>
       
    
 
     
+    </div>
+    <div class="col-md-3">
+       
+       <table class="table table-striped">
+        <thead>
+          
+        </thead>
+        <tbody>
+      {% if estacionamiento.puestos %}
+        <tr><td><b><i class="fa fa-at"></i> Puestos:</b></td></tr>
+        <tr><td>{{estacionamiento.puestos}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horario_reserin %}
+        <tr><td><b><i class="fa fa-at"></i> Horario reserva in:</b></td></tr>
+        <tr><td>{{estacionamiento.horario_reserin}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horario_reserout %}
+        <tr><td><b><i class="fa fa-at"></i> Horario reserva out:</b></td></tr>
+        <tr><td>{{estacionamiento.horario_reserout}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horarioin %}
+        <tr><td><b><i class="fa fa-at"></i> Horario apertura:</b></td></tr>
+        <tr><td>{{estacionamiento.horarioin}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horarioout %}
+        <tr><td><b><i class="fa fa-at"></i> Horario cierre:</b></td></tr>
+        <tr><td>{{estacionamiento.horarioout}}</td></tr>
+      {% endif %}
+      
+        </tbody>
+      </table>
     </div><div class="col-md-4">
 
     
