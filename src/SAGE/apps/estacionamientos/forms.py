@@ -38,13 +38,16 @@ class EstacionamientoForm(forms.Form):
                     validators = [
                           RegexValidator(
                                 regex='^[JV]-?\d{8}-?\d$',
-                                message='Introduzca un rif con un formato valido'
+                                message='Introduzca un rif con un formato válido'
                         )
                     ]
                 )
 
 
 class EstacionamientoExtendedForm(forms.Form):
+
+
+    puestos = forms.IntegerField(min_value=0, label='Número de puestos')
 
     tarifa_validator = RegexValidator(
                             regex='^[0-9]+$',

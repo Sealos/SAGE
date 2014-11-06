@@ -40,11 +40,12 @@ def estacionamiento_detail(request, _id):
     elif request.method == 'POST':
             form = EstacionamientoExtendedForm(request.POST)
             if form.is_valid():
-                estacionamientos[_id]['tarifa'] = form.cleaned_data.get('tarifa', ''),
-                estacionamientos[_id]['horarioin'] = form.cleaned_data.get('horarioin', ''),
-                estacionamientos[_id]['horarioout'] = form.cleaned_data.get('horarioout', ''),
-                estacionamientos[_id]['horario_reserin'] = form.cleaned_data.get('horario_reserin', ''),
-                estacionamientos[_id]['horario_reserout'] = form.cleaned_data.get('horario_reserout', ''),
+                estacionamientos[_id]['tarifa'] = form.cleaned_data['tarifa']
+                estacionamientos[_id]['horarioin'] = form.cleaned_data['horarioin']
+                estacionamientos[_id]['horarioout'] = form.cleaned_data['horarioout']
+                estacionamientos[_id]['horario_reserin'] = form.cleaned_data['horario_reserin']
+                estacionamientos[_id]['horario_reserout'] = form.cleaned_data['horario_reserout']
+                estacionamientos[_id]['puestos'] = form.cleaned_data['puestos']
                 return render(request, 'estacionamiento_extend.html', {'estacionamiento': estacionamientos[_id]})
 
             else:
