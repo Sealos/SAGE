@@ -5,7 +5,7 @@ from django.core.validators import RegexValidator
 class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
-                            regex='^0/d{3}-?\d{7}$',
+                            regex='^(\d)+',
                             message='Solo debe contener digitos'
                         )
 
@@ -15,7 +15,7 @@ class EstacionamientoForm(forms.Form):
                     label="Propietario",
                     validators = [
                           RegexValidator(
-                                regex='^[a-zA-z]+$',
+                                regex='^[a-zA-z]+( [a-zA-z]+)?$',
                                 message='Solo debe contener letras'
                         )
                     ]
