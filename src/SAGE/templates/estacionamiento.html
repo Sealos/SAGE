@@ -91,22 +91,42 @@
           
         </thead>
         <tbody>
-			<tr><td><b>Nombre Estacionamiento:</b></td></tr>
+			<tr><td><b><i class="fa fa-car"></i> Nombre Estacionamiento:</b></td></tr>
 			<tr><td>{{estacionamiento.nombre}}</td></tr>
 
-			<tr><td><b>Nombre Propietario:</b></td></tr>
-			<tr><td>{{estacionamiento.patrono}}</td></tr>
+			<tr><td><b><i class="fa fa-user"></i> Nombre Propietario:</b></td></tr>
+			<tr><td>{{estacionamiento.propietario}}</td></tr>
 
-			<tr><td><b>Direccion:</b></td></tr>
+			<tr><td><b><i class="fa fa-home"></i> Direccion:</b></td></tr>
 			<tr><td>{{estacionamiento.direccion}}</td></tr>
 
-			<tr><td><b>Telefonos:</b></td></tr>
-			<tr><td>{{estacionamiento.telefono_1}}</td></tr>
+			{% if estacionamiento.telefono_2 %}
+				<tr><td><b>Telefonos:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_1}}</td></tr>
+			{% endif %}
 
-			<tr><td><b>Correo Electronico:</b></td></tr>
-			<tr><td>{{estacionamiento.email_1}}</td></tr>
+			{% if estacionamiento.telefono_2 %}
+				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_2}}</td></tr>
+			{% endif %}
 
-			<tr><td><b>RIF:</b></td></tr>
+			 {% if estacionamiento.telefono_3 %}
+				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_3}}</td></tr>
+			{% endif %}
+
+			{% if estacionamiento.email_1 %}
+				<tr><td><b><i class="fa fa-at"></i> Correo Electronico:</b></td></tr>
+				<tr><td>{{estacionamiento.email_1}}</td></tr>
+			{% endif %}
+
+			{% if estacionamiento.email_2 %}
+			<tr><td><b><i class="fa fa-at"></i> Correo Electronico:</b></td></tr>
+			<tr><td>{{estacionamiento.email_2}}</td></tr>
+			{% endif %}
+
+
+			<tr><td><b><i class="fa fa-circle"></i> RIF:</b></td></tr>
 			<tr><td>{{estacionamiento.rif}}</td></tr>
           
         </tbody>
