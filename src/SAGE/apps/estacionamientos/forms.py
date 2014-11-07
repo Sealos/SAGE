@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.core.validators import RegexValidator
 
@@ -5,8 +7,8 @@ from django.core.validators import RegexValidator
 class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
-                            regex='^0212-?\d{7}',
-                            message='Debe introducir un formato válido'
+                            regex='^((0212)|(0412)|(0416)|(0414)|(0424)|(0426))\d{7}',
+                            message='Debe introducir un formato válido.'
                         )
 
     # nombre del dueno (no se permiten digitos)
@@ -16,7 +18,7 @@ class EstacionamientoForm(forms.Form):
                     validators = [
                           RegexValidator(
                                 regex='^[a-zA-z]+( [a-zA-z]+)?$',
-                                message='Solo debe contener letras'
+                                message='Sólo debe contener letras.'
                         )
                     ]
                 )
@@ -38,7 +40,7 @@ class EstacionamientoForm(forms.Form):
                     validators = [
                           RegexValidator(
                                 regex='^[JVD]-?\d{8}-?\d$',
-                                message='Introduzca un rif con un formato válido'
+                                message='Introduzca un RIF con un formato válido.'
                         )
                     ]
                 )
@@ -51,7 +53,7 @@ class EstacionamientoExtendedForm(forms.Form):
 
     tarifa_validator = RegexValidator(
                             regex='^[0-9]+$',
-                            message='Solo debe contener digitos'
+                            message='Sólo debe contener dígitos.'
                         )
 
     horarioin = forms.TimeField(required = True)

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from apps.estacionamientos.forms import EstacionamientoForm
 from apps.estacionamientos.forms import EstacionamientoExtendedForm
