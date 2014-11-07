@@ -8,7 +8,7 @@ class EstacionamientoForm(forms.Form):
 
     phone_validator = RegexValidator(
                             regex='^((0212)|(0412)|(0416)|(0414)|(0424)|(0426))-?\d{7}',
-                            message='Debe introducir un formato válido'
+                            message='Debe introducir un formato válido.'
                         )
 
     # nombre del dueno (no se permiten digitos)
@@ -17,8 +17,8 @@ class EstacionamientoForm(forms.Form):
                     label="Propietario",
                     validators = [
                           RegexValidator(
-                                regex='^[a-zA-ZáéíóúñÑÁÉÍÓÚ]+$',
-                                message='Sólo debe contener letras'
+                                regex='^[a-zA-ZáéíóúñÑÁÉÍÓÚ ]+$',
+                                message='Sólo debe contener letras.'
                         )
                     ]
                 )
@@ -40,7 +40,7 @@ class EstacionamientoForm(forms.Form):
                     validators = [
                           RegexValidator(
                                 regex='^[JVD]-?\d{8}-?\d$',
-                                message='Introduzca un RIF con un formato válido'
+                                message='Introduzca un RIF con un formato válido.'
                         )
                     ]
                 )
@@ -52,7 +52,7 @@ class EstacionamientoExtendedForm(forms.Form):
 
     tarifa_validator = RegexValidator(
                             regex='^(([0-9])|([0-9]*.[0-9]*))+$',
-                            message='Sólo debe contener dígitos'
+                            message='Sólo debe contener dígitos.'
                         )
 
     horarioin = forms.TimeField(required = True,label='Horario Apertura')
