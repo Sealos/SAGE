@@ -42,11 +42,26 @@ def estacionamiento_detail(request, _id):
     elif request.method == 'POST':
             form = EstacionamientoExtendedForm(request.POST)
             if form.is_valid():
+                hora_in = form.cleaned_data['horarioin']
+                hora_out = form.cleaned_data['horarioout']
+                reserva_in = form.cleaned_data['horario_reserin']
+                reserva_out = form.cleaned_data['horario_reserout']
+                if hora_in >= hora_out:
+                    return HttpResponse('El horario de apertura debe ser menor al de cierre')
+                if reserva_in >= reserva_out:
+                    return HttpResponse('El inicio de horario de reserva debe ser menor que el horario de cierre de reserva')
+
+
+                if hora_in > reserva_in or reserva_in > hora_out:
+                    return HttpResponse('El horario de inicio de reserva debe estar en un horario valido')
+
+                if hora_in > reserva_out or reserva_out > hora_out:
+                    return HttpResponse('El horario de cierre de reserva debe estar en un horario valido')
                 estacionamientos[_id]['tarifa'] = form.cleaned_data['tarifa']
-                estacionamientos[_id]['horarioin'] = form.cleaned_data['horarioin']
-                estacionamientos[_id]['horarioout'] = form.cleaned_data['horarioout']
-                estacionamientos[_id]['horario_reserin'] = form.cleaned_data['horario_reserin']
-                estacionamientos[_id]['horario_reserout'] = form.cleaned_data['horario_reserout']
+                estacionamientos[_id]['horarioin'] = hora_in
+                estacionamientos[_id]['horarioout'] = hora_out
+                estacionamientos[_id]['horario_reserin'] = reserva_in
+                estacionamientos[_id]['horario_reserout'] = reserva_out
                 estacionamientos[_id]['puestos'] = form.cleaned_data['puestos']
 
     else:
