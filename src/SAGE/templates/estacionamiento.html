@@ -80,8 +80,8 @@
 			<tr><td><b><i class="fa fa-home"></i> Dirección:</b></td></tr>
 			<tr><td>{{estacionamiento.direccion}}</td></tr>
 
-			{% if estacionamiento.telefono_2 %}
-				<tr><td><b>Telefonos:</b></td></tr>
+			{% if estacionamiento.telefono_1 %}
+				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
 				<tr><td>{{estacionamiento.telefono_1}}</td></tr>
 			{% endif %}
 
@@ -127,23 +127,23 @@
         </thead>
         <tbody>
       {% if estacionamiento.puestos %}
-        <tr><td><b><i class="fa fa-at"></i> Puestos:</b></td></tr>
+        <tr><td><b><i class="fa fa-car"></i> Puestos:</b></td></tr>
         <tr><td>{{estacionamiento.puestos}}</td></tr>
       {% endif %}
       {% if estacionamiento.horario_reserin %}
-        <tr><td><b><i class="fa fa-at"></i> Horario reserva in:</b></td></tr>
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario inicio de reserva:</b></td></tr>
         <tr><td>{{estacionamiento.horario_reserin}}</td></tr>
       {% endif %}
       {% if estacionamiento.horario_reserout %}
-        <tr><td><b><i class="fa fa-at"></i> Horario reserva out:</b></td></tr>
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario fin de reserva:</b></td></tr>
         <tr><td>{{estacionamiento.horario_reserout}}</td></tr>
       {% endif %}
       {% if estacionamiento.horarioin %}
-        <tr><td><b><i class="fa fa-at"></i> Horario apertura:</b></td></tr>
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario apertura:</b></td></tr>
         <tr><td>{{estacionamiento.horarioin}}</td></tr>
       {% endif %}
       {% if estacionamiento.horarioout %}
-        <tr><td><b><i class="fa fa-at"></i> Horario cierre:</b></td></tr>
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario cierre:</b></td></tr>
         <tr><td>{{estacionamiento.horarioout}}</td></tr>
       {% endif %}
       
