@@ -81,27 +81,27 @@
 			<tr><td>{{estacionamiento.direccion}}</td></tr>
 
 			{% if estacionamiento.telefono_1 %}
-				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
 				<tr><td>{{estacionamiento.telefono_1}}</td></tr>
 			{% endif %}
 
 			{% if estacionamiento.telefono_2 %}
-				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
 				<tr><td>{{estacionamiento.telefono_2}}</td></tr>
 			{% endif %}
 
 			 {% if estacionamiento.telefono_3 %}
-				<tr><td><b><i class="fa fa-phone"></i> Telefonos:</b></td></tr>
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
 				<tr><td>{{estacionamiento.telefono_3}}</td></tr>
 			{% endif %}
 
 			{% if estacionamiento.email_1 %}
-				<tr><td><b><i class="fa fa-at"></i> Correo Electronico:</b></td></tr>
+				<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
 				<tr><td>{{estacionamiento.email_1}}</td></tr>
 			{% endif %}
 
 			{% if estacionamiento.email_2 %}
-			<tr><td><b><i class="fa fa-at"></i> Correo Electronico:</b></td></tr>
+			<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
 			<tr><td>{{estacionamiento.email_2}}</td></tr>
 			{% endif %}
 
@@ -148,7 +148,7 @@
       {% endif %}
  	  {% if estacionamiento.horarioout %}
         <tr><td><b><i class="fa fa-money"></i></i> Tarifa:</b></td></tr>
-        <tr><td>{{estacionamiento.tarifa}}</td></tr>
+        <tr><td>{{estacionamiento.tarifa}} Bsf.</td></tr>
       {% endif %}
       
       
@@ -197,6 +197,7 @@
               
               
             </div>
+
             <!--/panel content-->
           </div>
           <!--/panel-->
@@ -210,24 +211,18 @@
   
   <!-- lower section -->
   <!--/row-->
-  
+
 </div><!--/container-->
 <!-- /Main -->
+<br><br><br><br>
+<footer class="text-center">
+      Paradigm Shift
+    </footer>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
     <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js'%}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
-</body></html>
+
+</body>
+
+</html>
