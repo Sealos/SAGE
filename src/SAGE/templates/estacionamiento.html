@@ -146,6 +146,11 @@
         <tr><td><b><i class="fa fa-clock-o"></i> Horario cierre:</b></td></tr>
         <tr><td>{{estacionamiento.horarioout}}</td></tr>
       {% endif %}
+ 	  {% if estacionamiento.horarioout %}
+        <tr><td><b><i class="fa fa-money"></i></i> Tarifa:</b></td></tr>
+        <tr><td>{{estacionamiento.tarifa}}</td></tr>
+      {% endif %}
+      
       
         </tbody>
       </table>
