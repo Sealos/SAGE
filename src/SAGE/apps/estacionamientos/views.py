@@ -12,7 +12,7 @@ def estacionamientos_all(request):
             form = EstacionamientoForm(request.POST)
             if form.is_valid():
                 if len(estacionamientos) >= 5:
-                    return HttpResponse('No se pueden agregar más estacionamientos.')
+                    return render(request, 'estacionamientoLlen.html')
                 estacionamiento = {
                         'propietario': form.cleaned_data['propietario'],
                         'nombre': form.cleaned_data['nombre'],
@@ -47,16 +47,16 @@ def estacionamiento_detail(request, _id):
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
                 if hora_in >= hora_out:
-                    return HttpResponse('El horario de apertura debe ser menor al de cierre.')
+                    return render(request, 'horarioAperturaMayor.html')
                 if reserva_in >= reserva_out:
-                    return HttpResponse('El inicio de horario de reserva debe ser menor que el horario de cierre de reserva.')
+                    return render(request, 'horarioReservaMayor.html')
 
 
                 if hora_in > reserva_in or reserva_in > hora_out:
-                    return HttpResponse('El horario de inicio de reserva debe estar en un horario válido.')
+                    return render(request, 'horarioReservaInvalido.html')
 
                 if hora_in > reserva_out or reserva_out > hora_out:
-                    return HttpResponse('El horario de cierre de reserva debe estar en un horario válido.')
+                    return render(request, 'horarioReservaInvalido2.html')
                 estacionamientos[_id]['tarifa'] = form.cleaned_data['tarifa']
                 estacionamientos[_id]['horarioin'] = hora_in
                 estacionamientos[_id]['horarioout'] = hora_out
