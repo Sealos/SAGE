@@ -6,7 +6,7 @@ from apps.estacionamientos.forms import EstacionamientoExtendedForm
 from django.forms import ModelForm
 
 class EstacionamientoModel(models.Model):
-	
+	#propietario=models.ForeignKey(Propietario)
 	propietario = models.CharField(max_length = 50, help_text = "Nombre Propio")
 	nombre = models.CharField(max_length = 50)
 	direccion = models.TextField(max_length = 120)
@@ -31,3 +31,10 @@ class EstacionamientoModelForm(EstacionamientoForm):
 		model = EstacionamientoModel
 		fields = ['propietario', 'nombre', 'direccion', 'telefono_1', 'telefono_2', 'telefono_3', 'email_1',
 				'email_2', 'rif', 'tarifa', 'horarioin', 'horariout', 'horario_resein', 'horario_reserout']
+
+#class Propietario(models.Model):
+	#nombre = models.CharField(max_length = 50, help_text = "Nombre Propio")
+	
+#class EstadoEstacionamiento(models.Model):
+	#
+	
