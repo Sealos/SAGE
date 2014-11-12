@@ -1,0 +1,226 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <meta charset="utf-8">
+    <title>
+      SAGE
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/base.css'%}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet">
+    
+   </head>
+
+ <body>
+        
+        <!-- Header -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-toggle"></span>
+      </button>
+          <div class="navbar-brand" href="#">
+            SAGE
+          </div>
+    </div>
+  </div><!-- /container -->
+</div>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container">
+  
+  <!-- upper section -->
+  <div class="row">
+  <div class="col-sm-2">
+      <!-- left -->
+                <h3>
+            <i class="glyphicon glyphicon-briefcase">
+            </i>
+            Menú
+          </h3>
+      <hr>
+
+         <ul class="nav nav-stacked">
+            <li>
+              <a href="..">
+                <i class="fa fa-bus"></i>
+                Estacionamientos
+              </a>
+            </li>
+          </ul>
+      <hr>
+      
+    </div><!-- /span-3 -->
+    <div class="col-sm-9">
+        
+      <!-- column 2 --> 
+       <h3><i class="fa fa-bus"></i> Estacionamiento</h3>  
+            
+       <hr>
+      
+     <!--/row-->
+    <div class="col-md-5">
+      
+      <table class="table table-striped">
+        <thead>
+          
+        </thead>
+        <tbody>
+			<tr><td><b><i class="fa fa-car"></i> Nombre del estacionamiento:</b></td></tr>
+			<tr><td>{{estacionamiento.nombre}}</td></tr>
+
+			<tr><td><b><i class="fa fa-user"></i> Nombre del propietario:</b></td></tr>
+			<tr><td>{{estacionamiento.propietario}}</td></tr>
+
+			<tr><td><b><i class="fa fa-home"></i> Dirección:</b></td></tr>
+			<tr><td>{{estacionamiento.direccion}}</td></tr>
+
+			{% if estacionamiento.telefono_1 %}
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_1}}</td></tr>
+			{% endif %}
+
+			{% if estacionamiento.telefono_2 %}
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_2}}</td></tr>
+			{% endif %}
+
+			 {% if estacionamiento.telefono_3 %}
+				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+				<tr><td>{{estacionamiento.telefono_3}}</td></tr>
+			{% endif %}
+
+			{% if estacionamiento.email_1 %}
+				<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
+				<tr><td>{{estacionamiento.email_1}}</td></tr>
+			{% endif %}
+
+			{% if estacionamiento.email_2 %}
+			<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
+			<tr><td>{{estacionamiento.email_2}}</td></tr>
+			{% endif %}
+
+
+			<tr><td><b><i class="fa fa-circle"></i> RIF:</b></td></tr>
+			<tr><td>{{estacionamiento.rif}}</td></tr>
+          
+        </tbody>
+      </table>
+      
+      <hr>  
+      <hr>
+      
+   
+
+    
+    </div>
+    <div class="col-md-3">
+       
+       <table class="table table-striped">
+        <thead>
+          
+        </thead>
+        <tbody>
+      {% if estacionamiento.puestos %}
+        <tr><td><b><i class="fa fa-car"></i> Puestos:</b></td></tr>
+        <tr><td>{{estacionamiento.puestos}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horario_reserin %}
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario inicio de reserva:</b></td></tr>
+        <tr><td>{{estacionamiento.horario_reserin}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horario_reserout %}
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario fin de reserva:</b></td></tr>
+        <tr><td>{{estacionamiento.horario_reserout}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horarioin %}
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario apertura:</b></td></tr>
+        <tr><td>{{estacionamiento.horarioin}}</td></tr>
+      {% endif %}
+      {% if estacionamiento.horarioout %}
+        <tr><td><b><i class="fa fa-clock-o"></i> Horario cierre:</b></td></tr>
+        <tr><td>{{estacionamiento.horarioout}}</td></tr>
+      {% endif %}
+ 	  {% if estacionamiento.horarioout %}
+        <tr><td><b><i class="fa fa-money"></i></i> Tarifa:</b></td></tr>
+        <tr><td>{{estacionamiento.tarifa}} Bsf.</td></tr>
+      {% endif %}
+      
+      
+        </tbody>
+      </table>
+    </div><div class="col-md-4">
+
+    
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <i class="glyphicon glyphicon-wrench pull-right">
+                </i>
+                <h4>
+                  Reserva
+                </h4>
+              </div>
+            </div>
+            <div class="panel-body">
+
+      
+              
+              <form action="." method="post" class="form form-vertical">
+              {% csrf_token %}
+              {% for field in form %}
+                <div class="control-group">
+                  <div class="controls">
+                    <input type="text" class="form-control" name="{{field.name}}" placeholder="{{field.label}}" for="id_{{field.name}}"><p>
+                    {{ field.errors }}
+                  </div>
+                </div> 
+              {% endfor %}
+                
+                <div class="control-group">
+                  <label>
+                  </label>
+                  <div class="controls">
+                    <button type="submit" class="btn btn-primary">
+                      Chequear Disponibilidad
+                    </button>
+                  </div>
+                </div>
+                
+                
+              </form>
+              
+              
+            </div>
+
+            <!--/panel content-->
+          </div>
+          <!--/panel-->
+          
+          <!--/panel-->
+          
+        </div><!--/col-span-9-->
+    
+  </div><!--/row-->
+  <!-- /upper section -->
+  
+  <!-- lower section -->
+  <!--/row-->
+
+</div><!--/container-->
+<!-- /Main -->
+<br><br><br><br>
+
+
+
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.1.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>
