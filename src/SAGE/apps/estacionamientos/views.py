@@ -85,7 +85,7 @@ def estacionamiento_reserva(request, _id):
             form = EstacionamientoReserva(request.POST)
             if form.is_valid():
                 inicio_reserva = form.cleaned_data['inicio']
-                final_reserva = form.cleaned_data['fin']
+                final_reserva = form.cleaned_data['final']
 
                 if inicio_reserva >= estacionamientos[_id]['horarioout'] or final_reserva >= estacionamientos[_id]['horarioout']:
                     return render(request, 'horarioReservaInvalido.html')
