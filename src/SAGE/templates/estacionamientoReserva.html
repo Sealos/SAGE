@@ -53,17 +53,6 @@
               </a>
             </li>
           </ul>
-
-          <br>
-
-          <ul class="nav nav-stacked">
-            <li>
-              <a href="./reserva">
-                <i class="fa fa-pencil-square-o"></i>
-                Reservar
-              </a>
-            </li>
-          </ul>
       <hr>
       
     </div><!-- /span-3 -->
@@ -174,7 +163,7 @@
                 <i class="glyphicon glyphicon-wrench pull-right">
                 </i>
                 <h4>
-                  Parametrizar
+                  Reserva
                 </h4>
               </div>
             </div>
@@ -182,7 +171,7 @@
 
       
               
-              <form action="." method="post" class="form form-vertical">
+              <form action="./reserva" method="post" class="form form-vertical">
               {% csrf_token %}
               {% for field in form %}
                 <div class="control-group">
@@ -198,7 +187,7 @@
                   </label>
                   <div class="controls">
                     <button type="submit" class="btn btn-primary">
-                      Crear estacionamiento
+                      Chequear Disponibilidad
                     </button>
                   </div>
                 </div>

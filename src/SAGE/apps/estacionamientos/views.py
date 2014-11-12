@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponse
 from apps.estacionamientos.forms import EstacionamientoForm
 from apps.estacionamientos.forms import EstacionamientoExtendedForm
+from apps.estacionamientos.forms import EstacionamientoReserva
 
 estacionamientos = []
 
@@ -70,4 +71,35 @@ def estacionamiento_detail(request, _id):
         form = EstacionamientoExtendedForm()
 
     return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
+
+
+def estacionamiento_reserva(request, _id):
+    _id = int(_id)
+    if request.method == 'GET':
+        # Mayor al numero que hay
+        if len(estacionamientos) < _id + 1:
+            return render(request, '404.html')
+        else:
+            form = EstacionamientoReserva()
+            return render(request, 'estacionamientoReserva.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
+
+    elif request.method == 'POST':
+            form = EstacionamientoReserva(request.POST)
+            if form.is_valid():
+                inicio_reserva = form.cleaned_data['inicio']
+                final_reserva = form.cleaned_data['final']
+
+                if inicio_reserva >= estacionamientos[_id]['horarioout'] or final_reserva >= estacionamientos[_id]['horarioout']:
+                    return render(request, 'horarioReservaInvalido.html')
+                if inicio_reserva >= final_reserva:
+                    return render(request, 'horarioReservaMayor.html')
+
+
+                if inicio_reserva <= estacionamientos[_id]['horarioin'] or final_reserva <= estacionamientos[_id]['horarioin']:
+                    return render(request, 'horarioReservaInvalido.html')
+
+    else:
+        form = EstacionamientoReserva()
+
+    return render(request, 'estacionamientoReserva.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
 

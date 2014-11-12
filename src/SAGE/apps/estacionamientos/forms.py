@@ -62,3 +62,7 @@ class EstacionamientoExtendedForm(forms.Form):
     horario_reserout = forms.TimeField(required = True, label='Horario Fin Reserva')
 
     tarifa =  forms.CharField(required = True, validators = [tarifa_validator])
+
+class EstacionamientoReserva(forms.Form):
+    inicio = forms.TimeField(label='Horario Inicio Reserva')
+    final = forms.TimeField(label='Horario Final Reserva')
