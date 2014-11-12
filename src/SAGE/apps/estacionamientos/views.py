@@ -46,6 +46,8 @@ def estacionamiento_detail(request, _id):
                 hora_out = form.cleaned_data['horarioout']
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
+                
+                print hora_in
                 if hora_in >= hora_out:
                     return render(request, 'horarioAperturaMayor.html')
                 if reserva_in >= reserva_out:
