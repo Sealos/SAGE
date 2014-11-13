@@ -48,7 +48,7 @@ def insertarReserva(hin,hout,puesto,listaReserva):
 def reservar(hin,hout,estacionamiento):
 	puesto = buscar(hin,hout,estacionamiento)
 	if puesto[2] != False:
-		insertarReserva(hin,hout,puesto[1],estacionamiento[puesto[0]])
+		estacionamiento[puesto[0]]=insertarReserva(hin,hout,puesto[1],estacionamiento[puesto[0]])
 		return estacionamiento
 	else:
 		return 1

@@ -55,15 +55,16 @@
           </ul>
 
           <br>
-
-          <ul class="nav nav-stacked">
-            <li>
-              <a href="./reserva">
-                <i class="fa fa-pencil-square-o"></i>
-                Reservar
-              </a>
-            </li>
-          </ul>
+          {% if estacionamiento.puestos %}
+            <ul class="nav nav-stacked">
+              <li>
+                <a href="./reserva">
+                  <i class="fa fa-pencil-square-o"></i>
+                  Reservar
+                </a>
+              </li>
+            </ul>
+          {% endif %}
       <hr>
       
     </div><!-- /span-3 -->

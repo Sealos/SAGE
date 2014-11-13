@@ -8,8 +8,12 @@ from apps.estacionamientos.forms import EstacionamientoReserva
 from apps.estacionamientos.controller import *
 
 estacionamientos = []
-listaReserva = []
 a = True
+TodosEstacionamientos = []
+i = 0
+while i < 5:
+    TodosEstacionamientos.append([])
+    i = i+1
 
 
 def estacionamientos_all(request):
@@ -81,6 +85,7 @@ def estacionamiento_detail(request, _id):
 
 def estacionamiento_reserva(request, _id):
     _id = int(_id)
+    listaReserva = TodosEstacionamientos[_id]
 
     if request.method == 'GET':
         # Mayor al numero que hay
@@ -111,24 +116,20 @@ def estacionamiento_reserva(request, _id):
                 
                 #alguien
                 if len(listaReserva)==0:
-                    print 'Shit'
-                    estadoinicial = []
-                    estadoinicial.append(elem1)
-                    estadoinicial.append(elem2)
+
                     i = 0
-                    elems = estacionamientos[_id]['puestos']
-                    while i<elems:
-                        listaReserva.append(estadoinicial)
+
+                    while i < estacionamientos[_id]['puestos']:
+                        listaReserva.append([elem1,elem2])
                         i = i+1
-                        print listaReserva
                 #alguien
                 x = buscar(inicio_reserva,final_reserva,listaReserva)
                 if x[2] == True :
                     reservar(inicio_reserva,final_reserva,listaReserva)
-                    print listaReserva
+                    return render(request, 'reservaDisponible.html')
                 else:
                     #TEFYYY
-                    return render(request, 'horarioReservaInvalido.html')
+                    return render(request, 'reservaNoDisponible.html')
     else:
         form = EstacionamientoReserva()
 
