@@ -5,8 +5,12 @@ from django.http import HttpResponse
 from apps.estacionamientos.forms import EstacionamientoForm
 from apps.estacionamientos.forms import EstacionamientoExtendedForm
 from apps.estacionamientos.forms import EstacionamientoReserva
+from apps.estacionamientos.controller import *
 
 estacionamientos = []
+listaReserva = []
+a = True
+
 
 def estacionamientos_all(request):
     if request.method == 'POST':
@@ -67,14 +71,17 @@ def estacionamiento_detail(request, _id):
                 estacionamientos[_id]['horario_reserout'] = reserva_out
                 estacionamientos[_id]['puestos'] = form.cleaned_data['puestos']
 
+
     else:
         form = EstacionamientoExtendedForm()
 
     return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
 
 
+
 def estacionamiento_reserva(request, _id):
     _id = int(_id)
+
     if request.method == 'GET':
         # Mayor al numero que hay
         if len(estacionamientos) < _id + 1:
@@ -89,15 +96,39 @@ def estacionamiento_reserva(request, _id):
                 inicio_reserva = form.cleaned_data['inicio']
                 final_reserva = form.cleaned_data['final']
 
-                if inicio_reserva >= estacionamientos[_id]['horarioout'] or final_reserva >= estacionamientos[_id]['horarioout']:
+                if inicio_reserva >= estacionamientos[_id]['horarioout'] or final_reserva > estacionamientos[_id]['horarioout']:
                     return render(request, 'horarioReservaInvalido.html')
                 if inicio_reserva >= final_reserva:
                     return render(request, 'horarioReservaMayor.html')
 
 
-                if inicio_reserva <= estacionamientos[_id]['horarioin'] or final_reserva <= estacionamientos[_id]['horarioin']:
+                if inicio_reserva < estacionamientos[_id]['horarioin'] or final_reserva <= estacionamientos[_id]['horarioin']:
                     return render(request, 'horarioReservaInvalido.html')
 
+                elem1 = (estacionamientos[_id]['horarioin'],estacionamientos[_id]['horarioin'])
+                elem2 = (estacionamientos[_id]['horarioout'],estacionamientos[_id]['horarioout'])
+
+                
+                #alguien
+                if len(listaReserva)==0:
+                    print 'Shit'
+                    estadoinicial = []
+                    estadoinicial.append(elem1)
+                    estadoinicial.append(elem2)
+                    i = 0
+                    elems = estacionamientos[_id]['puestos']
+                    while i<elems:
+                        listaReserva.append(estadoinicial)
+                        i = i+1
+                        print listaReserva
+                #alguien
+                x = buscar(inicio_reserva,final_reserva,listaReserva)
+                if x[2] == True :
+                    reservar(inicio_reserva,final_reserva,listaReserva)
+                    print listaReserva
+                else:
+                    #TEFYYY
+                    return render(request, 'horarioReservaInvalido.html')
     else:
         form = EstacionamientoReserva()
 

@@ -41,15 +41,15 @@ def busquedaBin(hin,hout,listaTuplas):
 def insertarReserva(hin,hout,puesto,listaReserva):
 	# no verifica precondicion, se supone que se hace buscar antes para ver si se puede agregar
 	tupla = (hin,hout)
-	listaReserva.insert(tupla,puesto)
+	listaReserva.insert(puesto,tupla)
 	#estacionamiento[puesto].sort()
 	return listaReserva
 			
 def reservar(hin,hout,estacionamiento):
 	puesto = buscar(hin,hout,estacionamiento)
-	if puesto[2] != None:
-		insertar(hin,hout,puesto,estacionamiento)
-		print estacionamiento
+	if puesto[2] != False:
+		insertarReserva(hin,hout,puesto[1],estacionamiento[puesto[0]])
+		return estacionamiento
 	else:
 		return 1
 
