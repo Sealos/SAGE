@@ -4,7 +4,7 @@ from django.shortcuts import render
 from estacionamientos.forms import EstacionamientoForm
 from estacionamientos.forms import EstacionamientoExtendedForm
 from estacionamientos.forms import EstacionamientoReserva
-from estacionamientos.controller import *
+from estacionamientos.controller import buscar, reservar
 
 estacionamientos = []
 a = True
