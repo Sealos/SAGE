@@ -68,6 +68,18 @@ def reservar(hin,hout,estacionamiento):
 		return 1
 
 
+def HorarioReserva(ReservaInicio, ReservaFin, HorarioApertura, HorarioCierre):
+
+	if ReservaInicio >= ReservaFin:
+		return (False,'horarioReservaMayor.html')
+	if ReservaFin.hour - ReservaInicio.hour < 1:
+		return (False,'horarioReservaMayor.html')
+	if ReservaFin > HorarioCierre:
+		return (False, 'horarioReservaInvalido.html')
+	if ReservaInicio < HorarioApertura:
+		return (False, 'horarioReservaInvalido2.html')
+	return (True,'')
+
 #print busquedaBin(3,4,[(0,1),(1,1),(3,4),(4,5)])	
 #hin = '13:00'
 #hout = '17:00'
