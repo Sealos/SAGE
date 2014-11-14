@@ -4,7 +4,7 @@ from django.shortcuts import render
 from estacionamientos.forms import EstacionamientoForm
 from estacionamientos.forms import EstacionamientoExtendedForm
 from estacionamientos.forms import EstacionamientoReserva
-from estacionamientos.controller import buscar, reservar
+from estacionamientos.controller import buscar, reservar, HorarioEstacionamiento
 
 estacionamientos = []
 
@@ -48,19 +48,11 @@ def estacionamiento_detail(request, _id):
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
 
-                if hora_in >= hora_out:
-                    return render(request, 'horarioAperturaMayor.html')
-                if reserva_in >= reserva_out:
-                    return render(request, 'horarioReservaMayor.html')
 
-                #return render(request, 'estacionamiento.html', {'mensaje':'No quiero hacer nada', 'color':'#FFFFFFF'})
-
-
-                if hora_in > reserva_in or reserva_in > hora_out:
-                    return render(request, 'horarioReservaInvalido.html')
-
-                if hora_in > reserva_out or reserva_out > hora_out:
-                    return render(request, 'horarioReservaInvalido2.html')
+                x = HorarioEstacionamiento(hora_in,hora_out,reserva_in,reserva_out)
+                if not x[0]:
+                    return render(request, x[1])
+                
 
                 estacionamientos[_id]['tarifa'] = form.cleaned_data['tarifa']
                 estacionamientos[_id]['horarioin'] = hora_in

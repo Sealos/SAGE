@@ -10,6 +10,20 @@
 # con el horario inicio y fin de las reservas
 # [[(horaIn,horaOut),(horaIn,horaOut)],[],....]
 
+# chequeo de horarios de extended
+def HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin):
+
+	if HoraInicio >= HoraFin:
+		return (False,'horarioAperturaMayor.html')
+	if ReservaInicio >= ReservaFin:
+		return (False,'horarioReservaMayor.html')
+	if ReservaInicio > HoraFin:
+		return (False, 'horarioReservaInvalido.html')
+	if ReservaFin < HoraInicio or ReservaFin > HoraFin:
+		return (False, 'horarioReservaInvalido2.html')
+	return (True,'')
+
+
 # busca un puesta en el estacionamiento
 def buscar(hin,hout,estacionamiento):
 	for i in range(len(estacionamiento)):
