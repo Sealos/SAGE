@@ -42,7 +42,7 @@ INSTALLED_APPS = (
 )
 
 LOCAL_APPS = (
-    'apps.estacionamientos',
+    'estacionamientos',
 )
 
 INSTALLED_APPS = INSTALLED_APPS + LOCAL_APPS
@@ -57,9 +57,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database

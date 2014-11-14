@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render_to_response, render
-from django.http import HttpResponse
-from apps.estacionamientos.forms import EstacionamientoForm
-from apps.estacionamientos.forms import EstacionamientoExtendedForm
-from apps.estacionamientos.forms import EstacionamientoReserva
-from apps.estacionamientos.controller import *
+from django.shortcuts import render
+from estacionamientos.forms import EstacionamientoForm
+from estacionamientos.forms import EstacionamientoExtendedForm
+from estacionamientos.forms import EstacionamientoReserva
+from estacionamientos.controller import *
 
 estacionamientos = []
 a = True
@@ -55,8 +54,7 @@ def estacionamiento_detail(request, _id):
                 hora_out = form.cleaned_data['horarioout']
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
-                
-                print hora_in
+
                 if hora_in >= hora_out:
                     return render(request, 'horarioAperturaMayor.html')
                 if reserva_in >= reserva_out:
@@ -113,7 +111,6 @@ def estacionamiento_reserva(request, _id):
                 elem1 = (estacionamientos[_id]['horarioin'],estacionamientos[_id]['horarioin'])
                 elem2 = (estacionamientos[_id]['horarioout'],estacionamientos[_id]['horarioout'])
 
-                
                 #alguien
                 if len(listaReserva)==0:
 
