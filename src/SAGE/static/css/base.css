@@ -1,3 +1,11 @@
+body {
+ 
+  background-image: url("./images.jpg");
+  background-repeat:no-repeat;
+  background-position: 93% 50%;
+}
+
+
  .navbar-static-top {
         margin-bottom:20px;
       }
