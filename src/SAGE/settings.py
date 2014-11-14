@@ -99,7 +99,7 @@ STATIC_URL = '/static/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = normpath(join(BASE_DIR, 'assets'))
 
-STATICFILES_DIRS = (normpath(join(BASE_DIR, 'static')),)
+STATICFILES_DIRS = (normpath(join(BASE_DIR, 'SAGE/static')),)
 
 # TEMPLATE CONFIGURATION
 # See:
@@ -122,4 +122,4 @@ TEMPLATE_LOADERS = (
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'SAGE/templates')]
