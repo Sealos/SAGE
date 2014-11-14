@@ -10,11 +10,11 @@ class EstacionamientoModel(models.Model):
 	propietario = models.CharField(max_length = 50, help_text = "Nombre Propio")
 	nombre = models.CharField(max_length = 50)
 	direccion = models.TextField(max_length = 120)
-	
+
 	telefono_1 = models.CharField(blank = True, null = True, max_length = 30)
 	telefono_2 = models.CharField(blank = True, null = True, max_length = 30)
 	telefono_3 = models.CharField(blank = True, null = True, max_length = 30)
-	
+
 	email_1 = models.EmailField(blank=True, null=True)
 	email_2 = models.EmailField(blank=True, null=True)
 

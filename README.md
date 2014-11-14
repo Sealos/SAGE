@@ -1,4 +1,4 @@
 SAGE
 ====
 
-Djando project for SAGE
+Django project for SAGE
