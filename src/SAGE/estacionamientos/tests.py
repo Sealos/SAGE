@@ -317,7 +317,51 @@ class SimpleFormTestCase(TestCase):
 								'tarifa': 12}
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(),False)
+		
+###################################################################
+# ESTACIONAMIENTO_RESERVA_FORM
+###################################################################
 
+	def test_EstacionamientoReserva_Vacio(self):
+		form_data = {}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
+	def test_EstacionamientoReserva_UnCampo(self):
+		form_data = {'inicio':datetime.time(6,0)}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
+	def test_EstacionamientoReserva_TodosCamposBien(self):
+		form_data = {'inicio':datetime.time(6,0),
+								'final':datetime.time(12,0)}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),True)
+		
+	def test_EstacionamientoReserva_InicioString(self):
+		form_data = {'inicio':'hola',
+								'final':datetime.time(12,0)}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
+	def test_EstacionamientoReserva_FinString(self):
+		form_data = {'inicio':datetime.time(6,0),
+								'final':'hola'}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
+	def test_EstacionamientoReserva_InicioNone(self):
+		form_data = {'inicio':None,
+								'final':datetime.time(12,0)}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
+	def test_EstacionamientoReserva_finalNone(self):
+		form_data = {'inicio':datetime.time(6,0),
+								'final':None}
+		form = EstacionamientoForm(data=form_data)
+		self.assertEqual(form.is_valid(),False)
+		
 #class MyTest(unittest.TestCase):
 #	def setUp(self):
 #		self.client = Client()
