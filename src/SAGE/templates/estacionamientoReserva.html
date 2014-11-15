@@ -68,7 +68,7 @@
     <div class="col-sm-9">
         
       <!-- column 2 --> 
-       <h3><i class="fa fa-bus"></i> Estacionamiento {{estacionamiento.nombre}}</h3>  
+       <h3><i class="fa fa-bus"></i> Estacionamiento {{estacionamiento.Nombre}}</h3>  
             
        <hr>
       
@@ -81,42 +81,42 @@
         </thead>
         <tbody>
 			<tr><td><b><i class="fa fa-car"></i> Nombre del estacionamiento:</b></td></tr>
-			<tr><td>{{estacionamiento.nombre}}</td></tr>
+      <tr><td>{{estacionamiento.Nombre}}</td></tr>
 
-			<tr><td><b><i class="fa fa-user"></i> Nombre del propietario:</b></td></tr>
-			<tr><td>{{estacionamiento.propietario}}</td></tr>
+      <tr><td><b><i class="fa fa-user"></i> Nombre del propietario:</b></td></tr>
+      <tr><td>{{estacionamiento.Propietario}}</td></tr>
 
-			<tr><td><b><i class="fa fa-home"></i> Dirección:</b></td></tr>
-			<tr><td>{{estacionamiento.direccion}}</td></tr>
+      <tr><td><b><i class="fa fa-home"></i> Dirección:</b></td></tr>
+      <tr><td>{{estacionamiento.Direccion}}</td></tr>
 
-			{% if estacionamiento.telefono_1 %}
-				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
-				<tr><td>{{estacionamiento.telefono_1}}</td></tr>
-			{% endif %}
+      {% if estacionamiento.Telefono_1 %}
+        <tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+        <tr><td>{{estacionamiento.Telefono_1}}</td></tr>
+      {% endif %}
 
-			{% if estacionamiento.telefono_2 %}
-				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
-				<tr><td>{{estacionamiento.telefono_2}}</td></tr>
-			{% endif %}
+      {% if estacionamiento.Telefono_2 %}
+        <tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+        <tr><td>{{estacionamiento.Telefono_2}}</td></tr>
+      {% endif %}
 
-			 {% if estacionamiento.telefono_3 %}
-				<tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
-				<tr><td>{{estacionamiento.telefono_3}}</td></tr>
-			{% endif %}
+       {% if estacionamiento.Telefono_3 %}
+        <tr><td><b><i class="fa fa-phone"></i> Teléfono:</b></td></tr>
+        <tr><td>{{estacionamiento.Telefono_3}}</td></tr>
+      {% endif %}
 
-			{% if estacionamiento.email_1 %}
-				<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
-				<tr><td>{{estacionamiento.email_1}}</td></tr>
-			{% endif %}
+      {% if estacionamiento.Email_1 %}
+        <tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
+        <tr><td>{{estacionamiento.Email_1}}</td></tr>
+      {% endif %}
 
-			{% if estacionamiento.email_2 %}
-			<tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
-			<tr><td>{{estacionamiento.email_2}}</td></tr>
-			{% endif %}
+      {% if estacionamiento.Email_2 %}
+      <tr><td><b><i class="fa fa-at"></i> Correo Electrónico:</b></td></tr>
+      <tr><td>{{estacionamiento.Email_2}}</td></tr>
+      {% endif %}
 
 
-			<tr><td><b><i class="fa fa-circle"></i> RIF:</b></td></tr>
-			<tr><td>{{estacionamiento.rif}}</td></tr>
+      <tr><td><b><i class="fa fa-circle"></i> RIF:</b></td></tr>
+      <tr><td>{{estacionamiento.Rif}}</td></tr>
           
         </tbody>
       </table>
@@ -135,29 +135,29 @@
           
         </thead>
         <tbody>
-      {% if estacionamiento.puestos %}
+      {% if estacionamiento2.NroPuesto %}
         <tr><td><b><i class="fa fa-car"></i> Puestos:</b></td></tr>
-        <tr><td>{{estacionamiento.puestos}}</td></tr>
+        <tr><td>{{estacionamiento2.NroPuesto}}</td></tr>
       {% endif %}
-      {% if estacionamiento.horario_reserin %}
+      {% if estacionamiento2.Reservas_Inicio %}
         <tr><td><b><i class="fa fa-clock-o"></i> Horario inicio de reserva:</b></td></tr>
-        <tr><td>{{estacionamiento.horario_reserin}}</td></tr>
+        <tr><td>{{estacionamiento2.Reservas_Inicio}}</td></tr>
       {% endif %}
-      {% if estacionamiento.horario_reserout %}
+      {% if estacionamiento2.Reservas_Cierre %}
         <tr><td><b><i class="fa fa-clock-o"></i> Horario fin de reserva:</b></td></tr>
-        <tr><td>{{estacionamiento.horario_reserout}}</td></tr>
+        <tr><td>{{estacionamiento2.Reservas_Cierre}}</td></tr>
       {% endif %}
-      {% if estacionamiento.horarioin %}
+      {% if estacionamiento2.Apertura %}
         <tr><td><b><i class="fa fa-clock-o"></i> Horario apertura:</b></td></tr>
-        <tr><td>{{estacionamiento.horarioin}}</td></tr>
+        <tr><td>{{estacionamiento2.Apertura}}</td></tr>
       {% endif %}
-      {% if estacionamiento.horarioout %}
+      {% if estacionamiento2.Cierre %}
         <tr><td><b><i class="fa fa-clock-o"></i> Horario cierre:</b></td></tr>
-        <tr><td>{{estacionamiento.horarioout}}</td></tr>
+        <tr><td>{{estacionamiento2.Cierre}}</td></tr>
       {% endif %}
- 	  {% if estacionamiento.horarioout %}
+    {% if estacionamiento2.Tarifa %}
         <tr><td><b><i class="fa fa-money"></i></i> Tarifa:</b></td></tr>
-        <tr><td>{{estacionamiento.tarifa}} Bsf.</td></tr>
+        <tr><td>{{estacionamiento2.Tarifa}} Bsf.</td></tr>
       {% endif %}
       
       
