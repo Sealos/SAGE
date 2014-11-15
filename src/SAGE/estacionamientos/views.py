@@ -15,10 +15,10 @@ def estacionamientos_all(request):
                     return render(request, 'estacionamientoLlen.html')
                 
                 obj = Estacionamiento(
-                        Propietario = estacionamiento['propietario'], 
-                        Nombre = estacionamiento['nombre'],
-                        Direccion = estacionamiento['direccion'], 
-                        Rif = estacionamiento['rif'], 
+                        Propietario = form.cleaned_data['propietario'], 
+                        Nombre = form.cleaned_data['nombre'],
+                        Direccion = form.cleaned_data['direccion'], 
+                        Rif = form.cleaned_data['rif'], 
                         Telefono_1 = form.cleaned_data['telefono_1'],
                         Telefono_2 = form.cleaned_data['telefono_2'], 
                         Telefono_3 = form.cleaned_data['telefono_3'], 
@@ -26,17 +26,17 @@ def estacionamientos_all(request):
                         Email_2 = form.cleaned_data['email_2']
                 )
                 obj.save()
+                print obj.id
     else:
         form = EstacionamientoForm()
     return render(request, 'base.html', {'form': form, 'estacionamientos': Estacionamiento.objects.all()})
 
 def estacionamiento_detail(request, _id):
     _id = int(_id)
-    _id = _id+1
     estacion = Estacionamiento.objects.get(id=_id)
     if request.method == 'GET':
         # Mayor al numero que hay
-        if len(Estacionamiento.objects.all()) < _id :
+        if len(Estacionamiento.objects.filter(id = _id)) < 1 :
             return render(request, '404.html')
         else:
             form = EstacionamientoExtendedForm()
@@ -81,6 +81,14 @@ def estacionamiento_detail(request, _id):
                             NroPuesto = form.cleaned_data['puestos']
                     )
                 obj.save()
+                if len(PuestosModel.objects.filter(estacionamiento = obj))>0 :
+                    PuestosModel.objects.filter(estacionamiento = obj).delete()
+                
+                i = 0
+                while i < obj.NroPuesto :
+                    puesto = PuestosModel(estacionamiento = obj)
+                    puesto.save()
+                    i = i+1 
 
                 elem1 = (obj.Apertura,obj.Apertura)
                 elem2 = (obj.Cierre,obj.Cierre)
