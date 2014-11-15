@@ -4,41 +4,48 @@ from django.shortcuts import render
 from estacionamientos.forms import EstacionamientoForm
 from estacionamientos.forms import EstacionamientoExtendedForm
 from estacionamientos.forms import EstacionamientoReserva
+from estacionamientos.models import *
 from estacionamientos.controller import buscar, reservar, HorarioEstacionamiento, HorarioReserva
-
-estacionamientos = []
 
 def estacionamientos_all(request):
     if request.method == 'POST':
             form = EstacionamientoForm(request.POST)
             if form.is_valid():
-                if len(estacionamientos) >= 5:
+                if len(Estacionamiento.objects.all()) >= 5:
                     return render(request, 'estacionamientoLlen.html')
-                estacionamiento = {
-                        'propietario': form.cleaned_data['propietario'],
-                        'nombre': form.cleaned_data['nombre'],
-                        'direccion': form.cleaned_data['direccion'],
-                        'telefono_1': form.cleaned_data['telefono_1'],
-                        'telefono_2': form.cleaned_data['telefono_2'],
-                        'telefono_3': form.cleaned_data['telefono_3'],
-                        'email_1': form.cleaned_data['email_1'],
-                        'email_2': form.cleaned_data['email_2'],
-                        'rif': form.cleaned_data['rif'],
-                }
-                estacionamientos.append(estacionamiento)
+                
+                obj = Estacionamiento(
+                        Propietario = estacionamiento['propietario'], 
+                        Nombre = estacionamiento['nombre'],
+                        Direccion = estacionamiento['direccion'], 
+                        Rif = estacionamiento['rif'], 
+                        Telefono_1 = form.cleaned_data['telefono_1'],
+                        Telefono_2 = form.cleaned_data['telefono_2'], 
+                        Telefono_3 = form.cleaned_data['telefono_3'], 
+                        Email_1 = form.cleaned_data['email_1'], 
+                        Email_2 = form.cleaned_data['email_2']
+                )
+                obj.save()
     else:
         form = EstacionamientoForm()
-    return render(request, 'base.html', {'form': form, 'estacionamientos': estacionamientos})
+    return render(request, 'base.html', {'form': form, 'estacionamientos': Estacionamiento.objects.all()})
 
 def estacionamiento_detail(request, _id):
     _id = int(_id)
+    _id = _id+1
+    estacion = Estacionamiento.objects.get(id=_id)
     if request.method == 'GET':
         # Mayor al numero que hay
-        if len(estacionamientos) < _id + 1:
+        if len(Estacionamiento.objects.all()) < _id :
             return render(request, '404.html')
         else:
             form = EstacionamientoExtendedForm()
-            return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
+            if len(ExtendedModel.objects.filter(Estacionamiento = estacion))>0 :
+                return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacion, 
+                    'estacionamiento2': ExtendedModel.objects.get(Estacionamiento = estacion)})
+            else:
+                return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacion, 
+                    'estacionamiento2': None})
 
     elif request.method == 'POST':
             form = EstacionamientoExtendedForm(request.POST)
@@ -52,31 +59,45 @@ def estacionamiento_detail(request, _id):
                 x = HorarioEstacionamiento(hora_in,hora_out,reserva_in,reserva_out)
                 if not x[0]:
                     return render(request, x[1])
-                
+                if len(ExtendedModel.objects.filter(Estacionamiento = estacion))>0 :
 
-                estacionamientos[_id]['tarifa'] = form.cleaned_data['tarifa']
-                estacionamientos[_id]['horarioin'] = hora_in
-                estacionamientos[_id]['horarioout'] = hora_out
-                estacionamientos[_id]['horario_reserin'] = reserva_in
-                estacionamientos[_id]['horario_reserout'] = reserva_out
-                estacionamientos[_id]['puestos'] = form.cleaned_data['puestos']
+                    obj = ExtendedModel.objects.get(Estacionamiento = estacion)
+                    obj.Estacionamiento = estacion 
+                    obj.Tarifa = form.cleaned_data['tarifa']
+                    obj.Apertura = form.cleaned_data['horarioin'] 
+                    obj.Cierre = form.cleaned_data['horarioout'] 
+                    obj.Reservas_Inicio = form.cleaned_data['horario_reserin']
+                    obj.Reservas_Cierre = form.cleaned_data['horario_reserout'] 
+                    obj.NroPuesto = form.cleaned_data['puestos']
+                    
+                else:
+                    obj = ExtendedModel(
+                            Estacionamiento = estacion, 
+                            Tarifa = form.cleaned_data['tarifa'],
+                            Apertura = form.cleaned_data['horarioin'], 
+                            Cierre = form.cleaned_data['horarioout'], 
+                            Reservas_Inicio = form.cleaned_data['horario_reserin'],
+                            Reservas_Cierre = form.cleaned_data['horario_reserout'], 
+                            NroPuesto = form.cleaned_data['puestos']
+                    )
+                obj.save()
 
-                elem1 = (estacionamientos[_id]['horarioin'],estacionamientos[_id]['horarioin'])
-                elem2 = (estacionamientos[_id]['horarioout'],estacionamientos[_id]['horarioout'])
-                estacionamientos[_id]['puestoReservas'] = [[elem1, elem2] for _ in range(estacionamientos[_id]['puestos'])]
+                elem1 = (obj.Apertura,obj.Apertura)
+                elem2 = (obj.Cierre,obj.Cierre)
+                #estacionamientos[_id]['puestoReservas'] = [[elem1, elem2] for _ in range(estacionamientos[_id]['puestos'])]
 
 
     else:
         form = EstacionamientoExtendedForm()
 
-    return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacionamientos[_id]})
+    return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacion, 
+        'estacionamiento2': ExtendedModel.objects.get(Estacionamiento = estacion)})
 
 
 
 def estacionamiento_reserva(request, _id):
     _id = int(_id)
     listaReserva = estacionamientos[_id]['puestoReservas']
-    print(listaReserva)
 
     if request.method == 'GET':
         # Mayor al numero que hay
