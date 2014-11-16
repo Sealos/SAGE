@@ -19,16 +19,16 @@ class Estacionamiento(models.Model):
 
 	Rif = models.CharField(max_length = 12)
 
+	Tarifa = models.CharField(max_length = 50, blank=True, null=True)
+	Apertura = models.TimeField(blank=True, null=True)
+	Cierre = models.TimeField(blank=True, null=True)
+	Reservas_Inicio = models.TimeField(blank=True, null=True)
+	Reservas_Cierre = models.TimeField(blank=True, null=True)
+	NroPuesto = models.IntegerField(blank=True, null=True)
 
 
-class ExtendedModel(models.Model):
-	Estacionamiento = models.ForeignKey(Estacionamiento, primary_key = True)
-	Tarifa = models.CharField(max_length = 50, null = True)
-	Apertura = models.TimeField()
-	Cierre = models.TimeField()
-	Reservas_Inicio = models.TimeField()
-	Reservas_Cierre = models.TimeField()
-	NroPuesto = models.IntegerField()
+#class ExtendedModel(models.Model):
+#	Estacionamiento = models.ForeignKey(Estacionamiento, primary_key = True)
 	
 #class EstacionamientoModelForm(EstacionamientoForm):
 #	class Meta:
@@ -42,10 +42,11 @@ class ExtendedModel(models.Model):
 #class EstadoEstacionamiento(models.Model):
 	#
 	
-class PuestosModel(models.Model):
-	estacionamiento = models.ForeignKey(ExtendedModel)
+#class PuestosModel(models.Model):
+#	estacionamiento = models.ForeignKey(ExtendedModel)
 
 class ReservasModel(models.Model):
-	puesto = models.ForeignKey(PuestosModel)
+	Estacionamiento = models.ForeignKey(Estacionamiento)
+	Puesto = models.IntegerField()
 	InicioReserva = models.TimeField()
 	FinalReserva = models.TimeField()
