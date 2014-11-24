@@ -17,15 +17,16 @@ def estacionamientos_all(request):
     listaReserva = []
     # Si se hace un POST a esta vista implica que se quiere agregar un nuevo
     # estacionamiento
+    estacionamientos = Estacionamiento.objects.all()
     if request.method == 'POST':
             # Creamos un formulario con los datos que recibimos
             form = EstacionamientoForm(request.POST)
 
             # Parte de la entrega era limitar la cantidad maxima de
             # estacionamientos a 5
-            estacionamientos = Estacionamiento.objects.all()
             if len(estacionamientos) >= 5:
-                    return render(request, 'estacionamientoLlen.html')
+                    return render(request, 'templateMensaje.html',
+                                  {'color':'red', 'mensaje':'No se pueden agregar más estacionamientos'})
 
             # Si el formulario es valido, entonces creamos un objeto con
             # el constructor del modelo
@@ -42,9 +43,12 @@ def estacionamientos_all(request):
                         Email_2 = form.cleaned_data['email_2']
                 )
                 obj.save()
+                # Recargamos los estacionamientos ya que acabamos de agregar
+                estacionamientos = Estacionamiento.objects.all()
     # Si no es un POST es un GET, y mandamos un formulario vacio
     else:
         form = EstacionamientoForm()
+
     return render(request, 'base.html', {'form': form, 'estacionamientos': estacionamientos})
 
 def estacionamiento_detail(request, _id):
@@ -58,11 +62,7 @@ def estacionamiento_detail(request, _id):
     global listaReserva
     listaReserva = []
 
-    if request.method == 'GET':
-        form = EstacionamientoExtendedForm()
-        return render(request, 'estacionamiento.html', {'form': form, 'estacionamiento': estacion})
-
-    elif request.method == 'POST':
+    if request.method == 'POST':
             # Leemos el formulario
             form = EstacionamientoExtendedForm(request.POST)
             # Si el formulario
@@ -71,7 +71,6 @@ def estacionamiento_detail(request, _id):
                 hora_out = form.cleaned_data['horarioout']
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
-
 
                 x = HorarioEstacionamiento(hora_in, hora_out, reserva_in, reserva_out)
                 if not x[0]:
