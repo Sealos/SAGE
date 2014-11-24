@@ -321,7 +321,7 @@ class SimpleFormTestCase(TestCase):
 
 ######################################################################
 # ESTACIONAMIENTO_EXTENDED pruebas controlador
-
+###################################################################
 
 	def test_HorariosValidos(self):
 		HoraInicio = datetime.time(hour =12,minute = 0, second = 0)
@@ -461,6 +461,9 @@ class SimpleFormTestCase(TestCase):
 
 ##############################################################
 # Estacionamiento Reserva Controlador
+###################################################################
+
+# HorarioReserva, pruebas Unitarias
 	def test_HorarioReservaValido(self):
 		ReservaInicio =datetime.time(hour =13,minute = 0, second = 0)
 		ReservaFin = datetime.time(hour =15,minute = 0, second = 0)
@@ -501,6 +504,21 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioReserva(ReservaInicio,ReservaFin,HoraApertura,HoraCierre)
 		self.assertEqual(x,(False,'horarioReservaInvalido2.html'))
 
+	def test_Reservacion_CamposVacios(self):
+		form_data = {'inicio':datetime.time(6,0),'final':datetime.time(12,0)}
+		form = EstacionamientoReserva(data=form_data)
+		self.assertEqual(form.is_valid(),True)
+		
+# Buscar, Pruebas Unitarias
+		
+	def test_Buscar_
+		HoraApertura= datetime.time(hour =12,minute = 0, second = 0)
+		HoraCierre =datetime.time(hour =18,minute = 0, second = 0)
+		listaReserva=[[HoraApertura, HoraCierre] for _ in range(estacion.NroPuesto)]
+		inicioReserva=
+		final_reserva=
+		
+		
 		
 #class MyTest(unittest.TestCase):
 #	def setUp(self):
