@@ -45,7 +45,7 @@ def binaria(valor,inicio,fin,lista):
 def busquedaBin(hin,hout,listaTuplas):
 	#ln = len(listaTuplas)
 	index = binaria(hin,0,len(listaTuplas),listaTuplas)
-	if listaTuplas[index][0] > hout and listaTuplas[index-1][1] < hin:
+	if listaTuplas[index][0] >= hout and listaTuplas[index-1][1] <= hin:
 		return (index, True)
 	else:
 		return (index, False)
