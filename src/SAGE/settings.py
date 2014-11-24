@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from os.path import dirname, join, normpath
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = dirname(BASE_DIR)
 
