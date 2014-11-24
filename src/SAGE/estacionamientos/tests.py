@@ -5,7 +5,7 @@ from django.test import Client
 from django.test import TestCase
 import unittest
 
-from estacionamientos.controller import buscar, reservar, HorarioEstacionamiento, HorarioReserva
+from estacionamientos.controller import buscar, reservar, HorarioEstacionamiento, validarHorarioReserva
 from estacionamientos.forms import *
 from estacionamientos.forms import *
 
@@ -456,7 +456,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaFin = datetime.time(hour = 15, minute = 0, second = 0)
 		HoraApertura = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
-		x = HorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
+		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (True, ''))
 
 	def test_HorarioReservaInvalido_InicioReservacion_Mayor_FinalReservacion(self):
@@ -464,32 +464,32 @@ class SimpleFormTestCase(TestCase):
 		ReservaFin = datetime.time(hour = 12, minute = 59, second = 59)
 		HoraApertura = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
-		x = HorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
-		self.assertEqual(x, (False, 'horarioReservaMayor.html'))
+		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
+		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
 	def test_HorarioReservaInvalido_TiempoTotalMenor1h(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 13, minute = 59, second = 59)
 		HoraApertura = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
-		x = HorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
-		self.assertEqual(x, (False, 'horarioReservaMenor1Hora.html'))
+		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
+		self.assertEqual(x, (False, 'El tiempo de reserva debe ser al menos de 1 hora'))
 
 	def test_HorarioReservaInvalido_ReservaFinal_Mayor_HorarioCierre(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 18, minute = 0, second = 1)
 		HoraApertura = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
-		x = HorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
-		self.assertEqual(x, (False, 'horarioReservaInvalido.html'))
+		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
+		self.assertEqual(x, (False, 'El horario de inicio de reserva debe estar en un horario válido'))
 
 	def test_HorarioReservaInvalido_ReservaInicial_Menor_HorarioApertura(self):
 		ReservaInicio = datetime.time(hour = 11, minute = 59, second = 59)
 		ReservaFin = datetime.time(hour = 15, minute = 0, second = 1)
 		HoraApertura = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
-		x = HorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
-		self.assertEqual(x, (False, 'horarioReservaInvalido2.html'))
+		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
+		self.assertEqual(x, (False, 'El horario de cierre de reserva debe estar en un horario válido'))
 
 
 # class MyTest(unittest.TestCase):
