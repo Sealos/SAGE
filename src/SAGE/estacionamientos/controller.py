@@ -45,6 +45,8 @@ def binaria(valor,inicio,fin,lista):
 def busquedaBin(hin,hout,listaTuplas):
 	#ln = len(listaTuplas)
 	index = binaria(hin,0,len(listaTuplas),listaTuplas)
+	if index==0:
+		index = index+1
 	if listaTuplas[index][0] >= hout and listaTuplas[index-1][1] <= hin:
 		return (index, True)
 	else:
@@ -73,7 +75,7 @@ def HorarioReserva(ReservaInicio, ReservaFin, HorarioApertura, HorarioCierre):
 	if ReservaInicio >= ReservaFin:
 		return (False,'horarioReservaMayor.html')
 	if ReservaFin.hour - ReservaInicio.hour < 1:
-		return (False,'horarioReservaMayor.html')
+		return (False,'horarioReservaMenor1Hora.html')
 	if ReservaFin > HorarioCierre:
 		return (False, 'horarioReservaInvalido.html')
 	if ReservaInicio < HorarioApertura:

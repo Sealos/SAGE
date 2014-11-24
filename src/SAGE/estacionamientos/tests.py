@@ -486,7 +486,7 @@ class SimpleFormTestCase(TestCase):
 		HoraApertura= datetime.time(hour =12,minute = 0, second = 0)
 		HoraCierre =datetime.time(hour =18,minute = 0, second = 0)
 		x = HorarioReserva(ReservaInicio,ReservaFin,HoraApertura,HoraCierre)
-		self.assertEqual(x,(False,'horarioReservaMayor.html'))
+		self.assertEqual(x,(False,'horarioReservaMenor1Hora.html'))
 
 	def test_HorarioReservaInvalido_ReservaFinal_Mayor_HorarioCierre(self):
 		ReservaInicio =datetime.time(hour =13,minute = 0, second = 0)
