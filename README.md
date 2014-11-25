@@ -1,8 +1,8 @@
 SAGE
 ====
 
-	Para correr el Proyecto usando el terminal de comandos y un Sistema Operativo basado en Unix, 
-	 debe serguir las siguientes instrucciones:
+	Para correr el Proyecto usando el terminal de comandos y un Sistema Operativo basado en 
+	 Unix,debe serguir las siguientes instrucciones:
 		1) Debe tener instalado python3 en su maquina, al igual que pip y easy_install-3.4.
 			de igual manera habler instalado django con easy_install-3.4
 		2) Debe situarse en la carpeta SAGE dentro de la carpeta src que se encuentra dentro 
