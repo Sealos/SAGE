@@ -448,6 +448,9 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
+###################################################################
+# PRUEBAS DE FUNCIONES DEL CONTROLADOR
+###################################################################
 
 ##############################################################
 # Estacionamiento Reserva Controlador
@@ -491,6 +494,8 @@ class SimpleFormTestCase(TestCase):
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (False, 'El horario de cierre de reserva debe estar en un horario válido'))
 
+##############################################################
+#  Controlador
 
 # class MyTest(unittest.TestCase):
 # 	def setUp(self):
