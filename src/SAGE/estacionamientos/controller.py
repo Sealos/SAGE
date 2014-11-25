@@ -14,13 +14,17 @@
 def HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin):
 
 	if HoraInicio >= HoraFin:
-		return (False, 'horarioAperturaMayor.html')
+		return (False, 'El horario de apertura debe ser menor al horario de cierre')
 	if ReservaInicio >= ReservaFin:
-		return (False, 'horarioReservaMayor.html')
+		return (False, 'El horario de inicio de reserva debe ser menor al horario de cierre')
+	if ReservaInicio < HoraInicio:
+		return (False, 'El horario de inicio de reserva debe mayor o igual al horario de apertuda del estacionamiento')
 	if ReservaInicio > HoraFin:
-		return (False, 'horarioReservaInvalido.html')
-	if ReservaFin < HoraInicio or ReservaFin > HoraFin:
-		return (False, 'horarioReservaInvalido2.html')
+		return (False, 'El horario de comienzo de reserva debe ser menor al horario de cierre del estacionamiento')
+	if ReservaFin < HoraInicio:
+		return (False, 'El horario de apertura de estacionamiento debe ser menor al horario de finalización de reservas')
+	if ReservaFin > HoraFin:
+		return (False, 'El horario de cierre de estacionamiento debe ser mayor o igual al horario de finalización de reservas')
 	return (True, '')
 
 

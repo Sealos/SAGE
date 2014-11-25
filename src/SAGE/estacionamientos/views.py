@@ -72,9 +72,9 @@ def estacionamiento_detail(request, _id):
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
 
-                x = HorarioEstacionamiento(hora_in, hora_out, reserva_in, reserva_out)
-                if not x[0]:
-                    return render(request, x[1])
+                m_validado = HorarioEstacionamiento(hora_in, hora_out, reserva_in, reserva_out)
+                if not m_validado[0]:
+                    return render(request, 'templateMensaje.html', {'color':'red', 'mensaje': m_validado[1]})
 
                 estacion.Tarifa = form.cleaned_data['tarifa']
                 estacion.Apertura = hora_in
