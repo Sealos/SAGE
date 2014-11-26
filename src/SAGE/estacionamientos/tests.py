@@ -1287,20 +1287,3 @@ class SimpleFormTestCase(TestCase):
 	def test_reservar_todo_None(self):
 		x = reservar(None, None, None)
 		self.assertEqual(x, 1)
-
-	# def test_Buscar_
-
-##############################################################
-#  Controlador
-
-# class MyTest(unittest.TestCase):
-# 	def setUp(self):
-# 		self.client = Client()
-
-# 	def test_segunda(self):
-# 		response = self.client.post('/estacionamientos/', {})
-# 		print response.status_code
-		# self.assertEqual(response.status_code, 200)
-# 		self.assertFormError(response, 'form', 'some_field', 'This field is required.')
-		# response = c.post('/estacionamientos/', {'propietario': 'Victor', 'nombre': 'Destiny', 'direccion': 'Caracas', 'rif': 'V123456789'})
-		# response.status_code
