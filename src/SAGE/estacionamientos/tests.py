@@ -495,6 +495,9 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
+###################################################################
+# PRUEBAS DE FUNCIONES DEL CONTROLADOR
+###################################################################
 
 ##############################################################
 # Estacionamiento Reserva Controlador
@@ -683,6 +686,8 @@ class SimpleFormTestCase(TestCase):
 		
 	#def test_Buscar_
 		
+##############################################################
+#  Controlador
 
 # class MyTest(unittest.TestCase):
 # 	def setUp(self):

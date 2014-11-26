@@ -72,9 +72,9 @@ def estacionamiento_detail(request, _id):
                 reserva_in = form.cleaned_data['horario_reserin']
                 reserva_out = form.cleaned_data['horario_reserout']
 
-                x = HorarioEstacionamiento(hora_in, hora_out, reserva_in, reserva_out)
-                if not x[0]:
-                    return render(request, x[1])
+                m_validado = HorarioEstacionamiento(hora_in, hora_out, reserva_in, reserva_out)
+                if not m_validado[0]:
+                    return render(request, 'templateMensaje.html', {'color':'red', 'mensaje': m_validado[1]})
 
                 estacion.Tarifa = form.cleaned_data['tarifa']
                 estacion.Apertura = hora_in
@@ -100,6 +100,8 @@ def estacionamiento_reserva(request, _id):
 
     global listaReserva
 
+    # Antes de entrar en la reserva, si la lista esta vacia, agregamos los
+    # valores predefinidos
     if len(listaReserva) < 1:
 
         Puestos = ReservasModel.objects.filter(Estacionamiento = estacion).values_list('Puesto', 'InicioReserva', 'FinalReserva')
@@ -112,25 +114,28 @@ def estacionamiento_reserva(request, _id):
             listaReserva[obj[0]] = insertarReserva(obj[1], obj[2], puesto[0], listaReserva[obj[0]])
 
 
+    # Si se hace un GET renderizamos los estacionamientos con su formulario
     if request.method == 'GET':
-        # Mayor al numero que hay
-        if len(Estacionamiento.objects.filter(id = _id)) < 1:
-            return render(request, '404.html')
-        else:
-            form = EstacionamientoReserva()
-            return render(request, 'estacionamientoReserva.html', {'form': form, 'estacionamiento': estacion})
+        form = EstacionamientoReserva()
+        return render(request, 'estacionamientoReserva.html', {'form': form, 'estacionamiento': estacion})
 
+    # Si es un POST estan mandando un request
     elif request.method == 'POST':
             form = EstacionamientoReserva(request.POST)
+            # Verificamos si es valido con los validadores del formulario
             if form.is_valid():
                 inicio_reserva = form.cleaned_data['inicio']
                 final_reserva = form.cleaned_data['final']
 
+                # Validamos los horarios con los horario de salida y entrada
                 m_validado = validarHorarioReserva(inicio_reserva, final_reserva, estacion.Apertura, estacion.Cierre)
 
+                # Si no es valido devolvemos el request
                 if not m_validado[0]:
                     return render(request, 'templateMensaje.html', {'color':'red', 'mensaje': m_validado[1]})
 
+                # Si esta en un rango valido, procedemos a buscar en la lista
+                # el lugar a insertar
                 x = buscar(inicio_reserva, final_reserva, listaReserva)
                 if x[2] == True :
                     reservar(inicio_reserva, final_reserva, listaReserva)

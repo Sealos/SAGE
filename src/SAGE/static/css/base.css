@@ -2,7 +2,8 @@ body {
  
   background-image: url("./images.jpg");
   background-repeat:no-repeat;
-  background-position: 93% 50%;
+  background-position: bottom left;
+  background-attachment: fixed;
 }
 
 
