@@ -49,7 +49,7 @@ def binaria(valor, inicio, fin, lista):
 # Busca en una lista ordenada la posicion en la que una nueva tupla
 # puede ser insertado, y ademas devuelve un booleano que dice si la
 # tupla puede ser insertada, es decir que sus valores no solapen alguno
-# ya existente. 
+# ya existente.
 # Precondición: la lista debe tener ya la mayor y menor posible tupla
 def busquedaBin(hin, hout, listaTuplas):
 	# ln = len(listaTuplas)
