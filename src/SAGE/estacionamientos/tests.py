@@ -14,11 +14,11 @@ from estacionamientos.forms import *
 #                    ESTACIONAMIENTO VISTA DISPONIBLE
 ###################################################################
 class SimpleTest(unittest.TestCase):
-	#normal
+	# normal
 	def setUp(self):
 		self.client = Client()
 
-	#normal
+	# normal
 	def test_primera(self):
 		response = self.client.get('/estacionamientos/')
 		self.assertEqual(response.status_code, 200)
@@ -29,13 +29,13 @@ class SimpleTest(unittest.TestCase):
 
 class SimpleFormTestCase(TestCase):
 
-	#malicia
+	# malicia
 	def test_CamposVacios(self):
 		form_data = {}
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_SoloUnCampoNecesario(self):
 		form_data = {
 			'propietario': 'Pedro'
@@ -43,7 +43,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_DosCamposNecesarios(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -52,7 +52,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_TresCamposNecesarios(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -62,7 +62,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_TodosLosCamposNecesarios(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -73,7 +73,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#malicia
+	# malicia
 	def test_PropietarioInvalidoDigitos(self):
 		form_data = {
 			'propietario': 'Pedro132',
@@ -84,7 +84,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_PropietarioInvalidoSimbolos(self):
 		form_data = {
 			'propietario': 'Pedro!',
@@ -95,7 +95,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_RIFtamanoinvalido(self):
 		form_data = {
 			'propietario': 'Pedro132',
@@ -106,7 +106,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_RIFformatoinvalido(self):
 		form_data = {
 			'propietario': 'Pedro132',
@@ -117,7 +117,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_AgregarTLFs(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -131,7 +131,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#malicia
+	# malicia
 	def test_FormatoInvalidoTLF(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -143,7 +143,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_TamanoInvalidoTLF(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -155,7 +155,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_AgregarCorreos(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -171,7 +171,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#malicia
+	# malicia
 	def test_CorreoInvalido(self):
 		form_data = {
 			'propietario': 'Pedro',
@@ -190,20 +190,20 @@ class SimpleFormTestCase(TestCase):
 # ESTACIONAMIENTO_EXTENDED_FORM
 ###################################################################
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_UnCampo(self):
 		form_data = { 'puestos': 2}
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_DosCampos(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0)}
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_TresCampos(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -211,7 +211,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_CuatroCampos(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -220,7 +220,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoExtendedForm_CincoCampos(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -230,7 +230,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoExtendedForm_TodosCamposBien(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -241,7 +241,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoExtendedForm_Puestos0(self):
 		form_data = { 'puestos': 0,
 								'horarioin': datetime.time(6, 0),
@@ -252,7 +252,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoExtendedForm_HoraInicioIgualHoraCierre(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -263,7 +263,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoExtendedForm_HoraIniReserIgualHoraFinReser(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -274,7 +274,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_StringEnPuesto(self):
 		form_data = { 'puestos': 'hola',
 								'horarioin': datetime.time(6, 0),
@@ -285,7 +285,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_StringHoraInicio(self):
 		form_data = { 'puestos': 2,
 								'horarioin': 'holaa',
@@ -296,7 +296,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_NumeroNegativoHoraInicio(self):
 		form_data = { 'puestos': 2,
 								'horarioin':-1,
@@ -307,7 +307,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_NoneEntarifa(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -318,7 +318,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_NoneEnHorarioReserva(self):
 		form_data = { 'puestos': 2,
 								'horarioin': 'holaa',
@@ -329,7 +329,7 @@ class SimpleFormTestCase(TestCase):
 		form = EstacionamientoExtendedForm(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoExtendedForm_listaEnHoraReserva(self):
 		form_data = { 'puestos': 2,
 								'horarioin': datetime.time(6, 0),
@@ -344,7 +344,7 @@ class SimpleFormTestCase(TestCase):
 # ESTACIONAMIENTO_EXTENDED pruebas controlador
 ###################################################################
 
-	#normal
+	# normal
 	def test_HorariosValidos(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -353,7 +353,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (True, ''))
 
-	#malicia
+	# malicia
 	def test_HorariosInvalido_HoraCierre_Menor_HoraApertura(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 11, minute = 0, second = 0)
@@ -362,7 +362,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
-	#caso borde
+	# caso borde
 	def test_HorariosInvalido_HoraCierre_Igual_HoraApertura(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 12, minute = 0, second = 0)
@@ -371,7 +371,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
-	#caso borde
+	# caso borde
 	def test_HorariosInvalido_HoraCierreReserva_Menor_HoraAperturaReserva(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -380,7 +380,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de inicio de reserva debe ser menor al horario de cierre'))
 
-	#caso borde
+	# caso borde
 	def test_HorariosInvalido_HoraCierreReserva_Igual_HoraAperturaReserva(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -389,7 +389,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de inicio de reserva debe ser menor al horario de cierre'))
 
-	#caso borde
+	# caso borde
 	def test_Limite_HorarioValido_Apertura_Cierre(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 12, minute = 0, second = 1)
@@ -398,7 +398,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (True, ''))
 
-	#caso borde
+	# caso borde
 	def test_Limite_Superior_HorarioValido_Apertura_Cierre(self):
 		HoraInicio = datetime.time(hour = 0, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 23, minute = 59, second = 59)
@@ -407,7 +407,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (True, ''))
 
-	#caso borde
+	# caso borde
 	def test_InicioReserva_Mayor_HoraCierreEstacionamiento(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -416,7 +416,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de comienzo de reserva debe ser menor al horario de cierre del estacionamiento'))
 
-	#caso borde
+	# caso borde
 	def test_InicioReserva_Mayor_HoraCierreEstacionamiento2(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -425,7 +425,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de comienzo de reserva debe ser menor al horario de cierre del estacionamiento'))
 
-	#malicia
+	# malicia
 	def test_CierreReserva_Mayor_HoraCierreEstacionamiento(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -434,7 +434,7 @@ class SimpleFormTestCase(TestCase):
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
 		self.assertEqual(x, (False, 'El horario de cierre de estacionamiento debe ser mayor o igual al horario de finalización de reservas'))
 
-	#malicia
+	# malicia
 	def test_CierreReserva_Menos_HoraInicioEstacionamiento(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
@@ -449,46 +449,46 @@ class SimpleFormTestCase(TestCase):
 # ESTACIONAMIENTO_RESERVA_FORM
 ###################################################################
 
-	#malicia
+	# malicia
 	def test_EstacionamientoReserva_Vacio(self):
 		form_data = {}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#caso borde
+	# caso borde
 	def test_EstacionamientoReserva_UnCampo(self):
 		form_data = {'inicio':datetime.time(6, 0)}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#normal
+	# normal
 	def test_EstacionamientoReserva_TodosCamposBien(self):
 		form_data = {'inicio':datetime.time(6, 0), 'final':datetime.time(12, 0)}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), True)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoReserva_InicioString(self):
 		form_data = {'inicio':'hola',
 								'final':datetime.time(12, 0)}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoReserva_FinString(self):
 		form_data = {'inicio':datetime.time(6, 0),
 								'final':'hola'}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoReserva_InicioNone(self):
 		form_data = {'inicio':None,
 								'final':datetime.time(12, 0)}
 		form = EstacionamientoReserva(data = form_data)
 		self.assertEqual(form.is_valid(), False)
 
-	#malicia
+	# malicia
 	def test_EstacionamientoReserva_finalNone(self):
 		form_data = {'inicio':datetime.time(6, 0),
 								'final':None}
@@ -505,7 +505,7 @@ class SimpleFormTestCase(TestCase):
 
 # HorarioReserva, pruebas Unitarias
 
-	#normal
+	# normal
 	def test_HorarioReservaValido(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 15, minute = 0, second = 0)
@@ -514,7 +514,7 @@ class SimpleFormTestCase(TestCase):
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (True, ''))
 
-	#caso borde
+	# caso borde
 	def test_HorarioReservaInvalido_InicioReservacion_Mayor_FinalReservacion(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 12, minute = 59, second = 59)
@@ -523,7 +523,7 @@ class SimpleFormTestCase(TestCase):
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
-	#caso borde
+	# caso borde
 	def test_HorarioReservaInvalido_TiempoTotalMenor1h(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 13, minute = 59, second = 59)
@@ -532,7 +532,7 @@ class SimpleFormTestCase(TestCase):
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (False, 'El tiempo de reserva debe ser al menos de 1 hora'))
 
-	#caso borde
+	# caso borde
 	def test_HorarioReservaInvalido_ReservaFinal_Mayor_HorarioCierre(self):
 		ReservaInicio = datetime.time(hour = 13, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 18, minute = 0, second = 1)
@@ -541,7 +541,7 @@ class SimpleFormTestCase(TestCase):
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (False, 'El horario de inicio de reserva debe estar en un horario válido'))
 
-	#caso borde
+	# caso borde
 	def test_HorarioReservaInvalido_ReservaInicial_Menor_HorarioApertura(self):
 		ReservaInicio = datetime.time(hour = 11, minute = 59, second = 59)
 		ReservaFin = datetime.time(hour = 15, minute = 0, second = 1)
@@ -549,110 +549,110 @@ class SimpleFormTestCase(TestCase):
 		HoraCierre = datetime.time(hour = 18, minute = 0, second = 0)
 		x = validarHorarioReserva(ReservaInicio, ReservaFin, HoraApertura, HoraCierre)
 		self.assertEqual(x, (False, 'El horario de cierre de reserva debe estar en un horario válido'))
-	
-	#malicia
+
+	# malicia
 	def test_Reservacion_CamposVacios(self):
-		form_data = {'inicio':datetime.time(6,0),'final':datetime.time(12,0)}
-		form = EstacionamientoReserva(data=form_data)
-		self.assertEqual(form.is_valid(),True)
-		
+		form_data = {'inicio':datetime.time(6, 0), 'final':datetime.time(12, 0)}
+		form = EstacionamientoReserva(data = form_data)
+		self.assertEqual(form.is_valid(), True)
+
 # Binaria, Pruebas Unitarias
-		
-	#caso borde
+
+	# caso borde
 	def test_Binaria_lista_vacia(self):
 		valor = datetime.time(hour = 10, minute = 0, second = 0)
-		lista=[]
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,0)
-	
-	#caso borde
+		lista = []
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 0)
+
+	# caso borde
 	def test_Binaria_lista_un_elem(self):
 		valor = datetime.time(hour = 10, minute = 0, second = 0)
 		Hora1In = datetime.time(hour = 8, minute = 0, second = 0)
 		Hora1Out = datetime.time(hour = 9, minute = 0, second = 0)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,1)
-	
-	#caso borde
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 1)
+
+	# caso borde
 	def test_Binaria_horas_borde(self):
 		valor = datetime.time(hour = 10, minute = 0, second = 0)
 		Hora1In = datetime.time(hour = 0, minute = 0, second = 0)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 0)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora2Out = datetime.time(hour = 23, minute = 59, second = 59)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,1)
-	
-	#caso borde
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 1)
+
+	# caso borde
 	def test_Binaria_horas_borde2(self):
 		valor = datetime.time(hour = 0, minute = 0, second = 0)
 		Hora1In = datetime.time(hour = 0, minute = 0, second = 1)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 1)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora2Out = datetime.time(hour = 23, minute = 59, second = 59)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,0)
-		
-	#caso borde
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 0)
+
+	# caso borde
 	def test_Binaria_horas_borde3(self):
 		valor = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora1In = datetime.time(hour = 0, minute = 0, second = 0)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 0)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 58)
 		Hora2Out = datetime.time(hour = 23, minute = 59, second = 58)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,2)
-	
-	#malicia
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 2)
+
+	# malicia
 	def test_Binaria_horas_mal_orden(self):
 		valor = datetime.time(hour = 20, minute = 10, second = 13)
 		Hora1In = datetime.time(hour = 0, minute = 1, second = 0)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 30)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora2Out = datetime.time(hour = 23, minute = 59, second = 58)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,1)
-	
-	#malicia
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 1)
+
+	# malicia
 	def test_Binaria_horas_mal_orden2(self):
 		valor = datetime.time(hour = 20, minute = 10, second = 13)
 		Hora1In = datetime.time(hour = 0, minute = 1, second = 0)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 30)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora2Out = datetime.time(hour = 19, minute = 59, second = 58)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,1)
-	
-	#malicia
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 1)
+
+	# malicia
 	def test_Binaria_horas_mal_orden3(self):
 		valor = datetime.time(hour = 20, minute = 10, second = 13)
 		Hora1In = datetime.time(hour = 0, minute = 1, second = 0)
 		Hora1Out = datetime.time(hour = 0, minute = 0, second = 30)
 		Hora2In = datetime.time(hour = 23, minute = 59, second = 59)
 		Hora2Out = datetime.time(hour = 19, minute = 59, second = 58)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		x=binaria(valor,0,len(lista),lista)
-		self.assertEqual(x,1)
-		
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		x = binaria(valor, 0, len(lista), lista)
+		self.assertEqual(x, 1)
+
 # busquedaBin, Pruebas Integracion, funcion 'binaria' con 'busquedaBin'
 	
 	#caso borde
@@ -702,35 +702,35 @@ class SimpleFormTestCase(TestCase):
 		HoraOut =datetime.time(hour =22,minute = 0, second = 0)
 		x=busquedaBin(HoraIn,HoraOut,lista)
 		self.assertEqual(x,(1,False))
-		
-	#caso borde
+
+	# caso borde
 	def test_BusquedaBin_lista_solo_maxmin(self):
 		Hora1In = datetime.time(hour = 6, minute = 0, second = 0)
 		Hora1Out = datetime.time(hour = 6, minute = 0, second = 0)
 		Hora2In = datetime.time(hour = 22, minute = 0, second = 0)
 		Hora2Out = datetime.time(hour = 22, minute = 0, second = 0)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		HoraIn= datetime.time(hour =12,minute = 0, second = 0)
-		HoraOut =datetime.time(hour =18,minute = 0, second = 0)
-		x=busquedaBin(HoraIn,HoraOut,lista)
-		self.assertEqual(x,(1,True))
-	
-	#caso borde
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		HoraIn = datetime.time(hour = 12, minute = 0, second = 0)
+		HoraOut = datetime.time(hour = 18, minute = 0, second = 0)
+		x = busquedaBin(HoraIn, HoraOut, lista)
+		self.assertEqual(x, (1, True))
+
+	# caso borde
 	def test_BusquedaBin_horasIguales_Inicio(self):
 		Hora1In = datetime.time(hour = 6, minute = 0, second = 0)
 		Hora1Out = datetime.time(hour = 6, minute = 0, second = 0)
 		Hora2In = datetime.time(hour = 22, minute = 0, second = 0)
 		Hora2Out = datetime.time(hour = 22, minute = 0, second = 0)
-		lista= []
-		lista.append([Hora1In,Hora1Out])
-		lista.append([Hora2In,Hora2Out])
-		HoraIn= datetime.time(hour =6,minute = 0, second = 0)
-		HoraOut =datetime.time(hour =6,minute = 0, second = 0)
-		x=busquedaBin(HoraIn,HoraOut,lista)
-		self.assertEqual(x,(1,True))
-		
+		lista = []
+		lista.append([Hora1In, Hora1Out])
+		lista.append([Hora2In, Hora2Out])
+		HoraIn = datetime.time(hour = 6, minute = 0, second = 0)
+		HoraOut = datetime.time(hour = 6, minute = 0, second = 0)
+		x = busquedaBin(HoraIn, HoraOut, lista)
+		self.assertEqual(x, (1, True))
+
 	#caso borde
 	def test_BusquedaBin_horasIguales_Fin(self):
 		Hora1In = datetime.time(hour = 6, minute = 0, second = 0)
@@ -1287,9 +1287,9 @@ class SimpleFormTestCase(TestCase):
 	def test_reservar_todo_None(self):
 		x = reservar(None,None,None)
 		self.assertEqual(x,1)
-		
-	#def test_Buscar_
-		
+
+	# def test_Buscar_
+
 ##############################################################
 #  Controlador
 
