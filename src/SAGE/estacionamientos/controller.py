@@ -1,5 +1,5 @@
 # Archivo con funciones de control para SAGE
-
+import datetime
 
 # Las Tuplas de cada puesto deben tener los horarios de inicio y de cierre para que
 # pueda funcionar [(7:00,7:00), (19:00,19:00)]
@@ -30,6 +30,12 @@ def HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin):
 
 # busca un puesta en el estacionamiento
 def buscar(hin, hout, estacionamiento):
+	if not isinstance(estacionamiento,list):
+		return (-1,-1,False)
+	if len(estacionamiento) == 0:
+		return (-1,-1,False)
+	if not isinstance(hin,datetime.time) or not isinstance(hout,datetime.time):
+		return (-1,-1,False)
 	for i in range(len(estacionamiento)):
 		posicion = busquedaBin(hin, hout, estacionamiento[i])
 		if posicion[1] == True:
@@ -53,6 +59,12 @@ def binaria(valor, inicio, fin, lista):
 # Precondición: la lista debe tener ya la mayor y menor posible tupla
 def busquedaBin(hin, hout, listaTuplas):
 	# ln = len(listaTuplas)
+	if not isinstance(listaTuplas,list):
+		return (0,False)
+	if len(listaTuplas)==0:
+		return (0,True)
+	if not isinstance(hin,datetime.time) or not isinstance(hout,datetime.time):
+		return (0,False)
 	index = binaria(hin, 0, len(listaTuplas), listaTuplas)
 	if index == 0:
 		index = index + 1
@@ -64,12 +76,24 @@ def busquedaBin(hin, hout, listaTuplas):
 # inserta ordenadamente por hora de inicio
 def insertarReserva(hin, hout, puesto, listaReserva):
 	# no verifica precondicion, se supone que se hace buscar antes para ver si se puede agregar
+	if not isinstance(listaReserva,list):
+		return None
+	if len(listaReserva) == 0:
+		return listaReserva
+	if not isinstance(hin,datetime.time) or not isinstance(hout,datetime.time):
+		return listaReserva
 	tupla = (hin, hout)
 	listaReserva.insert(puesto, tupla)
 	# estacionamiento[puesto].sort()
 	return listaReserva
 
 def reservar(hin, hout, estacionamiento):
+	if not isinstance(estacionamiento,list):
+		return 1
+	if len(estacionamiento) == 0:
+		return 1
+	if not isinstance(hin,datetime.time) or not isinstance(hout,datetime.time):
+		return 1
 	puesto = buscar(hin, hout, estacionamiento)
 	if puesto[2] != False:
 		estacionamiento[puesto[0]] = insertarReserva(hin, hout, puesto[1], estacionamiento[puesto[0]])
