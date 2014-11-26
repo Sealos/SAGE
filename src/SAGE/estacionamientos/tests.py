@@ -360,7 +360,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 18, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioAperturaMayor.html'))
+		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
 	#caso borde
 	def test_HorariosInvalido_HoraCierre_Igual_HoraApertura(self):
@@ -369,7 +369,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 18, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioAperturaMayor.html'))
+		self.assertEqual(x, (False, 'El horario de apertura debe ser menor al horario de cierre'))
 
 	#caso borde
 	def test_HorariosInvalido_HoraCierreReserva_Menor_HoraAperturaReserva(self):
@@ -378,7 +378,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 11, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaMayor.html'))
+		self.assertEqual(x, (False, 'El horario de inicio de reserva debe ser menor al horario de cierre'))
 
 	#caso borde
 	def test_HorariosInvalido_HoraCierreReserva_Igual_HoraAperturaReserva(self):
@@ -387,7 +387,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 12, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaMayor.html'))
+		self.assertEqual(x, (False, 'El horario de inicio de reserva debe ser menor al horario de cierre'))
 
 	#caso borde
 	def test_Limite_HorarioValido_Apertura_Cierre(self):
@@ -414,16 +414,16 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 19, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 20, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaInvalido.html'))
+		self.assertEqual(x, (False, 'El horario de comienzo de reserva debe ser menor al horario de cierre del estacionamiento'))
 
 	#caso borde
-	def test_InicioReserva_Mayor_HoraCierreEstacionamiento(self):
+	def test_InicioReserva_Mayor_HoraCierreEstacionamiento2(self):
 		HoraInicio = datetime.time(hour = 12, minute = 0, second = 0)
 		HoraFin = datetime.time(hour = 18, minute = 0, second = 0)
 		ReservaInicio = datetime.time(hour = 19, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 20, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaInvalido.html'))
+		self.assertEqual(x, (False, 'El horario de comienzo de reserva debe ser menor al horario de cierre del estacionamiento'))
 
 	#malicia
 	def test_CierreReserva_Mayor_HoraCierreEstacionamiento(self):
@@ -432,7 +432,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 17, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 20, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaInvalido2.html'))
+		self.assertEqual(x, (False, 'El horario de cierre de estacionamiento debe ser mayor o igual al horario de finalización de reservas'))
 
 	#malicia
 	def test_CierreReserva_Menos_HoraInicioEstacionamiento(self):
@@ -441,7 +441,7 @@ class SimpleFormTestCase(TestCase):
 		ReservaInicio = datetime.time(hour = 10, minute = 0, second = 0)
 		ReservaFin = datetime.time(hour = 11, minute = 0, second = 0)
 		x = HorarioEstacionamiento(HoraInicio, HoraFin, ReservaInicio, ReservaFin)
-		self.assertEqual(x, (False, 'horarioReservaInvalido2.html'))
+		self.assertEqual(x, (False, 'El horario de inicio de reserva debe mayor o igual al horario de apertura del estacionamiento'))
 
 
 
