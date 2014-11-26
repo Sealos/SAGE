@@ -129,7 +129,7 @@ def estacionamiento_reserva(request, _id):
                 final_reserva = form.cleaned_data['final']
 
                 # Validamos los horarios con los horario de salida y entrada
-                m_validado = validarHorarioReserva(inicio_reserva, final_reserva, estacion.Apertura, estacion.Cierre)
+                m_validado = validarHorarioReserva(inicio_reserva, final_reserva, estacion.Reservas_Inicio, estacion.Reservas_Cierre)
 
                 # Si no es valido devolvemos el request
                 if not m_validado[0]:
